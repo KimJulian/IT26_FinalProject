@@ -1,3 +1,12 @@
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) DEFAULT 'Staff'
+);
+
+INSERT INTO users (username, password) VALUES ('admin', '1234');
+
 CREATE TABLE doctors (
     doctor_id INT PRIMARY KEY AUTO_INCREMENT,
     doctor_name VARCHAR(100) NOT NULL,
