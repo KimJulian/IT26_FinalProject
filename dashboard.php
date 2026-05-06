@@ -75,4 +75,28 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 </div>
 
 </body>
+<script>
+    const ctx = document.getElementById('statusChart').getContext('2d');
+    const statusChart = new Chart(ctx, {
+        type: 'pie', 
+        data: {
+            labels: ['Active', 'Discharged'],
+            datasets: [{
+                label: 'Number of Patients',
+                data: [
+                    <?php 
+                        $active = $conn->query("SELECT * FROM patients WHERE status='Active'")->num_rows;
+                        $discharged = $conn->query("SELECT * FROM patients WHERE status='Discharged'")->num_rows;
+                        echo "$active, $discharged";
+                    ?>
+                ],
+                backgroundColor: ['#9A6F77', '#C8A2C8'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
 </html>
