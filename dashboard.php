@@ -34,6 +34,17 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 </div>
 
 <div class="main-content">
+    
+    <?php if (isset($_GET['msg'])): ?>
+        <div style="padding: 15px; margin-bottom: 20px; background-color: #d4edda; color: #155724; border-radius: 8px; border: 1px solid #c3e6cb; font-weight: bold; text-align: center;">
+            <?php 
+                if ($_GET['msg'] == 'UpdatedSuccessfully') echo "✅ Patient record updated successfully!";
+                if ($_GET['msg'] == 'PatientAdded') echo "✅ New patient added to the system!";
+                if ($_GET['msg'] == 'Deleted') echo "🗑️ Record removed successfully!";
+            ?>
+        </div>
+    <?php endif; ?>
+
     <div class="card" style="width: 400px; margin: 0 auto;">
         <h3>Patient Status Overview</h3>
         <canvas id="statusChart"></canvas>
