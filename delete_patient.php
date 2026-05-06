@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
     $sql = "DELETE FROM patients WHERE patient_id = $id";
     
     if ($conn->query($sql) === TRUE) {
-        header("Location: dashboard.php?msg=DeletedSuccessfully");
+        header("Location: dashboard.php?msg=Deleted");
     } else {
         echo "Error deleting record: " . $conn->error;
     }
