@@ -22,3 +22,7 @@ CREATE TABLE patients (
     status VARCHAR(50) DEFAULT 'Active',
     FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
 );
+
+INSERT INTO doctors (doctor_name, specialization) VALUES 
+('Dr. Juan Dela Cruz', 'Cardiology'),
+('Dr. Maria Santos', 'Pediatrics');

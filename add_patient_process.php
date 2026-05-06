@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['patient_name'];
     $diagnosis = $_POST['diagnosis'];
     $doctor_id = $_POST['doctor_id'];
-    $status = $_POST['status'];
+    $status = "Active";
     $date = date('Y-m-d');
 
     $sql = "INSERT INTO patients (patient_name, admission_date, diagnosis, doctor_id, status) 
