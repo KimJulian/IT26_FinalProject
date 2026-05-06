@@ -58,6 +58,7 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
                 <th>Diagnosis</th>
                 <th>Assigned Doctor</th>
                 <th>Specialization</th>
+                <th>Status</th>
                 <th>Actions</th> 
             </tr>
         </thead>
@@ -77,6 +78,7 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
                             <td>" . htmlspecialchars($row['diagnosis']) . "</td>
                             <td>" . htmlspecialchars($row['doctor_name']) . "</td>
                             <td>" . htmlspecialchars($row['specialization']) . "</td>
+                            <td>" . htmlspecialchars($row['status']) . "</td>
                             <td>
                                  <a href='edit_patient.php?id=" . $row['patient_id'] . "' 
                                    style='color: #9A6F77; font-weight: bold; text-decoration: none; margin-right: 10px;'>
