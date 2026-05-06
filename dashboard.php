@@ -49,6 +49,7 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
                 <th>Diagnosis</th>
                 <th>Assigned Doctor</th>
                 <th>Specialization</th>
+                <th>Actions</th>
             </tr>
             <?php
 
@@ -59,13 +60,18 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <td>{$row['patient_name']}</td>
-                            <td>{$row['diagnosis']}</td>
-                            <td>{$row['doctor_name']}</td>
-                            <td>{$row['specialization']}</td>
-                          </tr>";
-                }
+    echo "<tr>
+        <td>".htmlspecialchars($row['patient_name'])."</td>
+        <td>".htmlspecialchars($row['diagnosis'])."</td>
+        <td>".htmlspecialchars($row['doctor_name'])."</td>
+        <td>".htmlspecialchars($row['specialization'])."</td>
+        <td>
+            <a href='delete_patient.php?id=".$row['patient_id']."' 
+               onclick='return confirm(\"Are you sure you want to delete this record?\")' 
+               style='color: red;'>Delete</a>
+        </td>
+      </tr>";
+}
             } else {
                 echo "<tr><td colspan='4'>No records found. Add data in the shell!</td></tr>";
             }
