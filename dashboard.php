@@ -36,8 +36,17 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
 <div class="main-content">
     <div class="card" style="width: 400px; margin: 0 auto;">
-    <h3>Patient Status Overview</h3>
-    <canvas id="statusChart"></canvas>
+        <h3>Patient Status Overview</h3>
+        <canvas id="statusChart"></canvas>
+    </div>
+
+    <h1>Dashboard Overview</h1>
+    
+    <div style="margin-bottom: 20px; text-align: right;">
+        <a href="add_patient.php" style="background-color: #9A6F77; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            + Add New Patient
+        </a>
+    </div>
 </div>
     <h1>Dashboard Overview</h1>
     
