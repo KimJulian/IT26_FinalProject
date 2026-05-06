@@ -75,11 +75,14 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
         </thead>
         <tbody>
             <?php
-            $sql = "SELECT patients.patient_id, patients.patient_name, patients.diagnosis, 
-                           doctors.doctor_name, doctors.specialization 
-                    FROM patients 
-                    INNER JOIN doctors ON patients.doctor_id = doctors.doctor_id";
-            
+            $sql = "SELECT patients.patient_id, 
+               patients.patient_name, 
+               patients.diagnosis, 
+               patients.status,
+               doctors.doctor_name, 
+               doctors.specialization 
+        FROM patients 
+        INNER JOIN doctors ON patients.doctor_id = doctors.doctor_id";
             $result = $conn->query($sql);
             
             if ($result && $result->num_rows > 0) {
