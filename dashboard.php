@@ -35,6 +35,10 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 </div>
 
 <div class="main-content">
+    <div class="card" style="width: 400px; margin: 0 auto;">
+    <h3>Patient Status Overview</h3>
+    <canvas id="statusChart"></canvas>
+</div>
     <h1>Dashboard Overview</h1>
     
     <div class="card">
@@ -47,7 +51,7 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
                 <th>Specialization</th>
             </tr>
             <?php
-            
+
             $sql = "SELECT patients.patient_name, patients.diagnosis, doctors.doctor_name, doctors.specialization 
                     FROM patients 
                     INNER JOIN doctors ON patients.doctor_id = doctors.doctor_id";
