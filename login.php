@@ -19,7 +19,6 @@
         <h2>Clinic Login</h2>
         
         <?php 
-        // Show error message if the login failed
         if(isset($_GET['error'])) {
             echo '<div class="error">' . htmlspecialchars($_GET['error']) . '</div>';
         }

@@ -22,9 +22,3 @@ CREATE TABLE patients (
     status VARCHAR(50) DEFAULT 'Active',
     FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
 );
-
-INSERT INTO doctors (doctor_name, specialization) 
-VALUES ('Dr. Juan Dela Cruz', 'Cardiology');
-
-INSERT INTO patients (patient_name, admission_date, diagnosis, doctor_id) 
-VALUES ('Kim Julian D. Mentopa', '2026-05-04', 'Hypertension', 1);
