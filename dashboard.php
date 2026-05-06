@@ -5,7 +5,7 @@ if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
-
+/*start http://localhost/HealthFile/login.php USE THIS IN GIT BASH*/
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
 ?>
 
@@ -14,7 +14,6 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 <head>
     <meta charset="UTF-8">
     <title>Clinic Dashboard</title>
-    <!-- Link to Chart.js for Requirement 2 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; margin: 0; display: flex; }
@@ -79,7 +78,10 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
                             <td>" . htmlspecialchars($row['doctor_name']) . "</td>
                             <td>" . htmlspecialchars($row['specialization']) . "</td>
                             <td>
-                                <!-- Requirement 4: Delete with Confirmation -->
+                                 <a href='edit_patient.php?id=" . $row['patient_id'] . "' 
+                                   style='color: #9A6F77; font-weight: bold; text-decoration: none; margin-right: 10px;'>
+                                   Edit
+                                </a>
                                 <a href='delete_patient.php?id=" . $row['patient_id'] . "' 
                                    style='color: #9A6F77; font-weight: bold; text-decoration: none;'
                                    onclick='return confirm(\"Are you sure you want to delete this record?\")'>
