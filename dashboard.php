@@ -62,7 +62,7 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
             ?>
         </div>
     <?php endif; ?>
-    
+
     <div class="stats-row">
         <div class="stat-card">
             <h3>Total Patients</h3>
@@ -77,6 +77,44 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
             <p>5</p>
         </div>
     </div>
+    <div class="table-container">
+        <div class="table-header">
+            <a href="add_patient.php" class="btn-add">+ Add Record</a>
+            <input type="text" placeholder="Search Lastname..." style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Firstname</th>
+                    <th>Middle</th>
+                    <th>Lastname</th>
+                    <th>Diagnosis</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sql = "SELECT * FROM patients";
+                $result = $conn->query($sql);
+                while($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $row['patient_id']; ?></td>
+                    <td><?php echo explode(' ', $row['patient_name'])[0]; ?></td>
+                    <td>M.</td>
+                    <td><?php echo end(explode(' ', $row['patient_name'])); ?></td>
+                    <td><?php echo $row['diagnosis']; ?></td>
+                    <td><?php echo $row['status']; ?></td>
+                    <td>
+                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77; text-decoration: none; font-weight: bold;">Update</a>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
     
 </div>
     <h1>Dashboard Overview</h1>
