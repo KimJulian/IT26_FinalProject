@@ -134,18 +134,28 @@ while($row = $result->fetch_assoc()):
                 </tr>
             </thead>
             <tbody>
-                <?php
+            <?php
                 $sql = "SELECT * FROM patients";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()): 
-                    $nameParts = explode(' ', $row['patient_name']);
+                    $nameParts = explode(' ', trim($row['patient_name']));
+                    $count = count($nameParts);
+
                     $firstName = $nameParts[0];
-                    $lastName = end($nameParts);
+
+                    $lastName = ($count > 1) ? end($nameParts) : "";
+
+                    if ($count > 2) {
+                        $middleParts = array_slice($nameParts, 1, $count - 2);
+                        $middleInitial = implode(' ', $middleParts);
+                    } else {
+                        $middleInitial = "";
+                    }
                 ?>
                 <tr>
                     <td><?php echo $row['patient_id']; ?></td>
                     <td><?php echo htmlspecialchars($firstName); ?></td>
-                    <td><?php echo htmlspecialchars($row['middle_name']); ?></td>
+                    <td><?php echo htmlspecialchars($middleInitial); ?></td>
                     <td><?php echo htmlspecialchars($lastName); ?></td>
                     <td><?php echo htmlspecialchars($row['course']); ?></td>
                     <td><?php echo htmlspecialchars($row['school_year']); ?></td>
