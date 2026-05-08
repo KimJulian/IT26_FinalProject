@@ -87,20 +87,17 @@ while($row = $year_data->fetch_assoc()){
         </div>
     <?php endif; ?>
 
-    <div class="stats-row">
-        <div class="stat-card">
-            <h3>Total Patients</h3>
-            <p>532</p>
-        </div>
-        <div class="stat-card">
-            <h3>Active Cases</h3>
-            <p>12</p>
-        </div>
-        <div class="stat-card">
-            <h3>New Today</h3>
-            <p>5</p>
-        </div>
+    <div class="chart-row" style="display: flex; gap: 20px; margin-bottom: 25px;">
+    <div class="chart-card" style="background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77;">
+        <h3 style="margin-top: 0; color: #666; font-size: 0.9rem;">STUDENTS BY INSTITUTE</h3>
+        <canvas id="courseChart" height="120"></canvas>
     </div>
+
+    <div class="chart-card" style="background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77;">
+        <h3 style="margin-top: 0; color: #666; font-size: 0.9rem;">YEAR LEVEL DISTRIBUTION</h3>
+        <canvas id="yearChart" height="120"></canvas>
+    </div>
+</div>
     <div class="table-container">
         <div class="table-header">
             <a href="add_patient.php" class="btn-add">+ Add Record</a>
