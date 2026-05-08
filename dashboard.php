@@ -52,30 +52,17 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
     </div>
 </div>
 
-<div class="main-content">
-    
+<div class="container">
     <?php if (isset($_GET['msg'])): ?>
-        <div style="padding: 15px; margin-bottom: 20px; background-color: #d4edda; color: #155724; border-radius: 8px; border: 1px solid #c3e6cb; font-weight: bold; text-align: center;">
+        <div style="padding: 10px; margin-bottom: 20px; background-color: #d4edda; color: #155724; border-radius: 5px; text-align: center;">
             <?php 
-                if ($_GET['msg'] == 'UpdatedSuccessfully') echo "✅ Patient record updated successfully!";
-                if ($_GET['msg'] == 'PatientAdded') echo "✅ New patient added to the system!";
+                if ($_GET['msg'] == 'UpdatedSuccessfully') echo "✅ Record updated successfully!";
+                if ($_GET['msg'] == 'PatientAdded') echo "✅ New patient added!";
                 if ($_GET['msg'] == 'Deleted') echo "🗑️ Record removed successfully!";
             ?>
         </div>
     <?php endif; ?>
-
-    <div class="card" style="width: 400px; margin: 0 auto;">
-        <h3>Patient Status Overview</h3>
-        <canvas id="statusChart"></canvas>
-    </div>
-
-    <h1>Dashboard Overview</h1>
     
-    <div style="margin-bottom: 20px; text-align: right;">
-        <a href="add_patient.php" style="background-color: #9A6F77; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
-            + Add New Patient
-        </a>
-    </div>
 </div>
     <h1>Dashboard Overview</h1>
     
