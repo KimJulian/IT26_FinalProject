@@ -28,6 +28,10 @@
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Log In</button>
+            <p style="font-size: 0.9em; margin-top: 15px; text-align: center;">
+                Don't have an account? 
+                <a href="register.php" style="color: #9A6F77; font-weight: bold; text-decoration: none;">Register</a>
+            </p>
         </form>
     </div>
 </body>

@@ -75,17 +75,28 @@ while($row = $result->fetch_assoc()):
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>HealthFile</h2>
-    <ul>
-        <li><a href="about.php">👥 About Us</a></li>
-        <li><a href="appointments.php">📅 Appointments</a></li>
-        <li><a href="inventory.php">💊 Available Med/Capsule</a></li>
+<div class="sidebar" style="background-color: #9A6F77; width: 250px; height: 100vh; display: flex; flex-direction: column; padding: 20px; color: white; position: fixed; left: 0; top: 0;">
+    
+    <h2 style="margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">HealthFile</h2>
+    
+    <ul style="list-style: none; padding: 0; margin: 0; flex-grow: 1;">
+        <li style="margin-bottom: 15px;">
+            <a href="about.php" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px;">👥 About Us</a>
+        </li>
+        <li style="margin-bottom: 15px;">
+            <a href="appointments.php" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px;">📅 Appointments</a>
+        </li>
+        <li style="margin-bottom: 15px;">
+            <a href="inventory.php" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px;">💊 Available Med/Capsule</a>
+        </li>
     </ul>
-    <div class="user-profile">
-        <p>👤 Dr. Dela Cruz</p>
-        <a href="logout.php" style="font-size: 0.8rem; opacity: 0.8; color: white;">Logout</a>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; margin-bottom: 20px;">
+        <a href="logout.php" style="color: #ffb3b3; text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: bold;">
+            <span>🚪</span> Logout
+        </a>
     </div>
+
 </div>
 
 <div class="container">
