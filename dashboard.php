@@ -8,6 +8,7 @@ if (!isset($_SESSION['user'])) {
 
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
+// 1. Fetch Chart Data
 $course_data = $conn->query("SELECT course, COUNT(*) as count FROM patients GROUP BY course");
 $courses = []; $course_counts = [];
 while($c_row = $course_data->fetch_assoc()){
@@ -21,87 +22,67 @@ while($y_row = $year_data->fetch_assoc()){
     $years[] = $y_row['school_year'];
     $year_counts[] = $y_row['count'];
 }
-
-$sql = "SELECT * FROM patients";
-$result = $conn->query($sql);
-
-while($row = $result->fetch_assoc()): 
-    $nameParts = explode(' ', $row['patient_name']);
-    $firstName = $nameParts[0];
-    $middleInitial = (count($nameParts) > 2) ? $nameParts[1] : ""; 
-    $lastName = end($nameParts);
-?> <tr>
-    <td><?php echo $row['patient_id']; ?></td>
-    <td><?php echo htmlspecialchars($firstName); ?></td>
-    <td><?php echo htmlspecialchars($middleInitial); ?></td> 
-    <td><?php echo htmlspecialchars($lastName); ?></td>
-</tr>
-
-<?php endwhile; ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Clinic Dashboard</title>
+    <title>Clinic Dashboard - HealthFile</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background-color: #f4f4f4; }
-        .sidebar { width: 220px; background-color: #9A6F77; color: white; height: 100vh; padding: 20px; position: fixed; }
-        .sidebar h2 { font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .sidebar a { color: white; text-decoration: none; display: block; }
-        .user-profile { position: absolute; bottom: 30px; }
-
-        .container { margin-left: 260px; padding: 30px; width: calc(100% - 280px); }
-        .stats-row { display: flex; gap: 20px; margin-bottom: 20px; }
-        .stat-card { background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77; }
-        .stat-card h3 { margin: 0; font-size: 0.9rem; color: #666; text-transform: uppercase; }
-        .stat-card p { font-size: 1.8rem; font-weight: bold; margin: 10px 0 0; color: #9A6F77; }
-
-        .chart-row { display: flex; gap: 20px; margin-bottom: 20px; }
-        .chart-card { background: white; padding: 15px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-height: 300px;}
-
-        .table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .search-box { padding: 8px; border: 1px solid #ddd; border-radius: 5px; width: 200px; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background-color: #f4f4f4; overflow-x: hidden; }
         
+        .sidebar { width: 250px; background-color: #9A6F77; color: white; height: 100vh; padding: 20px; position: fixed; left: 0; top: 0; display: flex; flex-direction: column; box-sizing: border-box; }
+        .sidebar h2 { font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; margin-top: 0; }
+        .sidebar ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .sidebar li { margin-bottom: 15px; }
+        .sidebar a { color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        .sidebar a:hover { opacity: 0.8; }
+        .logout-section { margin-top: auto; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; margin-bottom: 20px; }
+
+        .container { 
+            margin-left: 250px;
+            padding: 40px; 
+            width: calc(100% - 250px); 
+            box-sizing: border-box; 
+            min-height: 100vh;
+        }
+
+        .chart-row { display: flex; gap: 20px; margin-bottom: 25px; }
+        .chart-card { background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77; }
+        .chart-card h3 { margin-top: 0; color: #666; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .table-container { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .btn-add { background: #9A6F77; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: bold; transition: 0.3s; }
+        .btn-add:hover { background: #7d5a61; }
+
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; background: #f8f9fa; padding: 12px; border-bottom: 2px solid #dee2e6; font-size: 0.85rem; }
-        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-        .btn-add { background: #9A6F77; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.9rem; font-weight: bold; }
+        th { text-align: left; background: #f8f9fa; padding: 15px; border-bottom: 2px solid #dee2e6; font-size: 0.85rem; color: #333; }
+        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.9rem; color: #555; }
+        .action-links a { font-weight: bold; text-decoration: none; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
-<div class="sidebar" style="background-color: #9A6F77; width: 250px; height: 100vh; display: flex; flex-direction: column; padding: 20px; color: white; position: fixed; left: 0; top: 0;">
-    
-    <h2 style="margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">HealthFile</h2>
-    
-    <ul style="list-style: none; padding: 0; margin: 0; flex-grow: 1;">
-        <li style="margin-bottom: 15px;">
-            <a href="about.php" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px;">👥 About Us</a>
-        </li>
-        <li style="margin-bottom: 15px;">
-            <a href="appointments.php" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px;">📅 Appointments</a>
-        </li>
-        <li style="margin-bottom: 15px;">
-            <a href="inventory.php" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px;">💊 Available Med/Capsule</a>
-        </li>
+<div class="sidebar">
+    <h2>HealthFile</h2>
+    <ul>
+        <li><a href="about.php">👥 About Us</a></li>
+        <li><a href="inventory.php">💊 Available Med/Capsule</a></li>
     </ul>
-
-    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; margin-bottom: 50px;"> 
-        <a href="logout.php" style="color: #ffb3b3; text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: bold;">
-            <span>🚪</span> Logout
+    <div class="logout-section">
+        <a href="logout.php" style="color: #ffb3b3;">
+            <span style="font-size: 1.2rem;">🚪</span> Logout
         </a>
     </div>
-
 </div>
 
 <div class="container">
+    
     <?php if (isset($_GET['msg'])): ?>
-        <div style="padding: 10px; margin-bottom: 20px; background-color: #d4edda; color: #155724; border-radius: 5px; text-align: center;">
+        <div style="padding: 15px; margin-bottom: 25px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 8px; text-align: center; font-weight: 500;">
             <?php 
                 if ($_GET['msg'] == 'UpdatedSuccessfully') echo "✅ Record updated successfully!";
                 if ($_GET['msg'] == 'PatientAdded') echo "✅ New patient added!";
@@ -110,25 +91,21 @@ while($row = $result->fetch_assoc()):
         </div>
     <?php endif; ?>
 
-    <div class="chart-row" style="display: flex; gap: 20px; margin-bottom: 25px;">
-        <div class="chart-card" style="background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77;">
-            <h3 style="margin-top: 0; color: #666; font-size: 0.9rem;">STUDENTS BY INSTITUTE</h3>
-            <canvas id="courseChart" height="120"></canvas>
+    <div class="chart-row">
+        <div class="chart-card">
+            <h3>Students by Institute</h3>
+            <div style="height: 220px;"><canvas id="courseChart"></canvas></div>
         </div>
-
-        <div class="chart-card" style="background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77; height: 300px; overflow: hidden;">
-            <h3 style="margin-top: 0; color: #666; font-size: 0.9rem;">YEAR LEVEL DISTRIBUTION</h3>
-            <div style="position: relative; height: 220px; width: 100%;">
-                <canvas id="yearChart"></canvas>
-            </div>
+        <div class="chart-card">
+            <h3>Year Level Distribution</h3>
+            <div style="height: 220px;"><canvas id="yearChart"></canvas></div>
         </div>
     </div>
+
     <div class="table-container">
         <div class="table-header">
             <a href="add_patient.php" class="btn-add">+ Add Record</a>
-            <div class="search-area">
-                <input type="text" class="search-box" placeholder="Search Lastname...">
-            </div>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -140,37 +117,29 @@ while($row = $result->fetch_assoc()):
                     <th>Year</th>
                     <th>Date</th>
                     <th>Diagnosis</th>
-                    <th>Meds</th>
+                    <th>Medicines</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-            <?php
-    $sql = "SELECT * FROM patients";
-    $result = $conn->query($sql);
-    while($row = $result->fetch_assoc()): 
-    $fullName = trim($row['patient_name']);
-    $nameParts = explode(' ', $fullName);
-    $count = count($nameParts);
+                <?php
+                $sql = "SELECT * FROM patients";
+                $result = $conn->query($sql);
+                while($row = $result->fetch_assoc()): 
+                    $fullName = trim($row['patient_name']);
+                    $nameParts = explode(' ', $fullName);
+                    $count = count($nameParts);
 
-    if ($fullName == "Kim Julian D. Mentopa") {
-        $firstName = "Kim Julian";
-        $middleInitial = "D.";
-        $lastName = "Mentopa";
-    } elseif ($count >= 4) {
-        $firstName = $nameParts[0] . " " . $nameParts[1];
-        $middleInitial = $nameParts[2];
-        $lastName = $nameParts[3];
-    } elseif ($count == 3) {
-        $firstName = $nameParts[0];
-        $middleInitial = $nameParts[1];
-        $lastName = $nameParts[2];
-    } else {
-        $firstName = $nameParts[0];
-        $middleInitial = "";
-        $lastName = isset($nameParts[1]) ? $nameParts[1] : "";
-    }
-?>
+                    if ($fullName == "Kim Julian D. Mentopa") {
+                        $firstName = "Kim Julian"; $middleInitial = "D."; $lastName = "Mentopa";
+                    } elseif ($count >= 4) {
+                        $firstName = $nameParts[0] . " " . $nameParts[1]; $middleInitial = $nameParts[2]; $lastName = $nameParts[3];
+                    } elseif ($count == 3) {
+                        $firstName = $nameParts[0]; $middleInitial = $nameParts[1]; $lastName = $nameParts[2];
+                    } else {
+                        $firstName = $nameParts[0]; $middleInitial = ""; $lastName = $nameParts[1] ?? "";
+                    }
+                ?>
                 <tr>
                     <td><?php echo $row['patient_id']; ?></td>
                     <td><?php echo htmlspecialchars($firstName); ?></td>
@@ -181,12 +150,9 @@ while($row = $result->fetch_assoc()):
                     <td><?php echo htmlspecialchars($row['date_recorded']); ?></td>
                     <td><?php echo htmlspecialchars($row['diagnosis']); ?></td>
                     <td><?php echo htmlspecialchars($row['meds_given']); ?></td>
-                    <td style="display: flex; gap: 10px;">
-                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" 
-                           style="color: #9A6F77; font-weight: bold; text-decoration: none;">Update</a>   
-                        <a href="delete.php?id=<?php echo $row['patient_id']; ?>" 
-                           style="color: #d9534f; font-weight: bold; text-decoration: none;" 
-                           onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                    <td class="action-links" style="display: flex; gap: 10px;">
+                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77;">Update</a> 
+                        <a href="delete.php?id=<?php echo $row['patient_id']; ?>" style="color: #d9534f;" onclick="return confirm('Delete this record?');">Delete</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
@@ -194,10 +160,7 @@ while($row = $result->fetch_assoc()):
         </table>
     </div>
 </div>
-    
-</div>
 
-</body>
 <script>
     const courseCtx = document.getElementById('courseChart').getContext('2d');
     new Chart(courseCtx, {
@@ -205,38 +168,27 @@ while($row = $result->fetch_assoc()):
         data: {
             labels: <?php echo json_encode($courses); ?>,
             datasets: [{
-            label: 'Students',
-            data: <?php echo json_encode($course_counts); ?>,
-            backgroundColor: '#9A6F77'
-        }]
-    },
-    options: { maintainAspectRatio: false }
-});
+                label: 'Students',
+                data: <?php echo json_encode($course_counts); ?>,
+                backgroundColor: '#9A6F77'
+            }]
+        },
+        options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+    });
 
-   const yearCtx = document.getElementById('yearChart').getContext('2d');
-new Chart(yearCtx, {
-    type: 'pie',
-    data: {
-        labels: <?php echo json_encode($years); ?>,
-        datasets: [{
-            data: <?php echo json_encode($year_counts); ?>,
-            backgroundColor: ['#9A6F77', '#C8A2C8', '#7d5a61', '#b38b93'],
-            borderWidth: 1
-        }]
-    },
-    options: { 
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-                labels: {
-                    boxWidth: 12,
-                    padding: 10
-                }
-            }
-        }
-    }
-});
+    const yearCtx = document.getElementById('yearChart').getContext('2d');
+    new Chart(yearCtx, {
+        type: 'pie',
+        data: {
+            labels: <?php echo json_encode($years); ?>,
+            datasets: [{
+                data: <?php echo json_encode($year_counts); ?>,
+                backgroundColor: ['#9A6F77', '#C8A2C8', '#7d5a61', '#b38b93'],
+                borderWidth: 1
+            }]
+        },
+        options: { maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+    });
 </script>
+</body>
 </html>
