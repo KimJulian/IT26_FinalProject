@@ -5,8 +5,27 @@ if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
-/*start http://localhost/HealthFile/login.php USE THIS IN GIT BASH*/
+
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
+
+$totalPatients = $conn->query("SELECT * FROM patients")->num_rows;
+$activeCases = $conn->query("SELECT * FROM patients WHERE status='Active'")->num_rows;
+$newToday = $conn->query("SELECT * FROM patients WHERE DATE(date_recorded) = CURDATE()")->num_rows;
+
+
+$course_data = $conn->query("SELECT course, COUNT(*) as count FROM patients GROUP BY course");
+$courses = []; $course_counts = [];
+while($row = $course_data->fetch_assoc()){
+    $courses[] = $row['course'];
+    $course_counts[] = $row['count'];
+}
+
+$year_data = $conn->query("SELECT school_year, COUNT(*) as count FROM patients GROUP BY school_year");
+$years = []; $year_counts = [];
+while($row = $year_data->fetch_assoc()){
+    $years[] = $row['school_year'];
+    $year_counts[] = $row['count'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,16 +43,22 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
         .sidebar a { color: white; text-decoration: none; display: block; }
         .user-profile { position: absolute; bottom: 30px; }
 
-        .container { margin-left: 260px; padding: 30px; width: 100%; }
+        .container { margin-left: 260px; padding: 30px; width: calc(100% - 280px); }
         .stats-row { display: flex; gap: 20px; margin-bottom: 20px; }
         .stat-card { background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77; }
+        .stat-card h3 { margin: 0; font-size: 0.9rem; color: #666; text-transform: uppercase; }
         .stat-card p { font-size: 1.8rem; font-weight: bold; margin: 10px 0 0; color: #9A6F77; }
+
+        .chart-row { display: flex; gap: 20px; margin-bottom: 20px; }
+        .chart-card { background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
         .table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .search-box { padding: 8px; border: 1px solid #ddd; border-radius: 5px; width: 200px; }
+        
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; background: #f8f9fa; padding: 12px; border-bottom: 2px solid #dee2e6; }
-        td { padding: 12px; border-bottom: 1px solid #eee; }
+        th { text-align: left; background: #f8f9fa; padding: 12px; border-bottom: 2px solid #dee2e6; font-size: 0.85rem; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
         .btn-add { background: #9A6F77; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.9rem; font-weight: bold; }
     </style>
 </head>
