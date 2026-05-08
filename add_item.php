@@ -28,14 +28,77 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Add Inventory - HealthFile</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; display: flex; margin: 0; }
-        .sidebar { width: 250px; background-color: #9A6F77; color: white; height: 100vh; position: fixed; padding: 20px; box-sizing: border-box; }
-        .container { margin-left: 250px; padding: 40px; width: calc(100% - 250px); box-sizing: border-box; }
-        .form-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 500px; }
-        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        .btn-save { background: #9A6F77; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; }
-    </style>
+   <style>
+    body { 
+        font-family: 'Segoe UI', sans-serif; 
+        background-color: #f4f4f4; 
+        display: flex; 
+        margin: 0; 
+    }
+
+    .sidebar { 
+        width: 250px; 
+        background-color: #9A6F77; 
+        color: white; 
+        height: 100vh; 
+        position: fixed; 
+        padding: 20px; 
+        box-sizing: border-box; 
+    }
+
+    .container { 
+        margin-left: 250px; 
+        padding: 40px; 
+        width: calc(100% - 250px); 
+        box-sizing: border-box; 
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .form-card { 
+        background: white; 
+        padding: 40px; 
+        border-radius: 12px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        width: 100%;
+        max-width: 600px;
+    }
+
+    input, 
+    select { 
+        width: 100%; 
+        padding: 12px; 
+        margin: 10px 0 20px 0; 
+        border: 1px solid #ddd; 
+        border-radius: 5px; 
+        box-sizing: border-box; 
+    }
+
+    label {
+        font-weight: bold;
+        color: #555;
+        font-size: 0.9rem;
+    }
+
+    .btn-save { 
+        background: #9A6F77; 
+        color: white; 
+        border: none; 
+        padding: 14px; 
+        width: 100%; 
+        border-radius: 5px; 
+        cursor: pointer; 
+        font-weight: bold; 
+        font-size: 1rem;
+        transition: background 0.3s ease;
+    }
+
+    .btn-save:hover {
+        background: #7d5a61;
+    }
+</style>
 </head>
 <body>
 

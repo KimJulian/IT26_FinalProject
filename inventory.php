@@ -39,7 +39,6 @@ $result = $conn->query($sql);
     <ul style="list-style: none; padding: 0;">
         <li><a href="dashboard.php">📊 Dashboard</a></li>
         <li><a href="about.php">👥 About Us</a></li>
-        <li><a href="appointments.php">📅 Appointments</a></li>
         <li><a href="inventory.php" style="background: rgba(255,255,255,0.1); border-radius: 5px; padding: 5px;">💊 Inventory</a></li>
     </ul>
     <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px;">
