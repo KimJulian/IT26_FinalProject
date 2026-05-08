@@ -49,7 +49,7 @@ while($row = $year_data->fetch_assoc()){
         .stat-card p { font-size: 1.8rem; font-weight: bold; margin: 10px 0 0; color: #9A6F77; }
 
         .chart-row { display: flex; gap: 20px; margin-bottom: 20px; }
-        .chart-card { background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .chart-card { background: white; padding: 15px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-height: 300px;}
 
         .table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
@@ -158,14 +158,13 @@ while($row = $year_data->fetch_assoc()){
         data: {
             labels: <?php echo json_encode($courses); ?>,
             datasets: [{
-                label: 'Student Count',
-                data: <?php echo json_encode($course_counts); ?>,
-                backgroundColor: '#9A6F77',
-                borderRadius: 5
-            }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
-    });
+            label: 'Students',
+            data: <?php echo json_encode($course_counts); ?>,
+            backgroundColor: '#9A6F77'
+        }]
+    },
+    options: { maintainAspectRatio: false }
+});
 
     const yearCtx = document.getElementById('yearChart').getContext('2d');
     new Chart(yearCtx, {
