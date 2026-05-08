@@ -119,7 +119,6 @@ while($row = $year_data->fetch_assoc()){
                     <th>Date</th>
                     <th>Diagnosis</th>
                     <th>Meds</th>
-                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -142,7 +141,6 @@ while($row = $year_data->fetch_assoc()){
                     <td><?php echo htmlspecialchars($row['date_recorded']); ?></td>
                     <td><?php echo htmlspecialchars($row['diagnosis']); ?></td>
                     <td><?php echo htmlspecialchars($row['meds_given']); ?></td>
-                    <td><?php echo htmlspecialchars($row['status']); ?></td>
                     <td>
                         <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77; font-weight: bold; text-decoration: none;">Update</a>
                     </td>
