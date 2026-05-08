@@ -63,6 +63,21 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
         </div>
     <?php endif; ?>
     
+    <div class="stats-row">
+        <div class="stat-card">
+            <h3>Total Patients</h3>
+            <p>532</p>
+        </div>
+        <div class="stat-card">
+            <h3>Active Cases</h3>
+            <p>12</p>
+        </div>
+        <div class="stat-card">
+            <h3>New Today</h3>
+            <p>5</p>
+        </div>
+    </div>
+    
 </div>
     <h1>Dashboard Overview</h1>
     
