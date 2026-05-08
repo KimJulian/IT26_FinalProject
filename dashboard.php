@@ -80,8 +80,9 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
     <div class="table-container">
         <div class="table-header">
             <a href="add_patient.php" class="btn-add">+ Add Record</a>
-            <input type="text" placeholder="Search Lastname..." style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
-        </div>
+            <div class="search-area">
+                <input type="text" class="search-box" placeholder="Search Lastname...">
+            </div>
         <table>
             <thead>
                 <tr>
@@ -116,62 +117,6 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
     </div>
 </div>
     
-</div>
-    <h1>Dashboard Overview</h1>
-    
-    <div class="card">
-    <h3>Patient-Doctor Assignments (SQL Join)</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Patient Name</th>
-                <th>Diagnosis</th>
-                <th>Assigned Doctor</th>
-                <th>Specialization</th>
-                <th>Status</th>
-                <th>Actions</th> 
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $sql = "SELECT patients.patient_id, 
-               patients.patient_name, 
-               patients.diagnosis, 
-               patients.status,
-               doctors.doctor_name, 
-               doctors.specialization 
-        FROM patients 
-        INNER JOIN doctors ON patients.doctor_id = doctors.doctor_id";
-            $result = $conn->query($sql);
-            
-            if ($result && $result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <td>" . htmlspecialchars($row['patient_name']) . "</td>
-                            <td>" . htmlspecialchars($row['diagnosis']) . "</td>
-                            <td>" . htmlspecialchars($row['doctor_name']) . "</td>
-                            <td>" . htmlspecialchars($row['specialization']) . "</td>
-                            <td>" . htmlspecialchars($row['status']) . "</td>
-                            <td>
-                                 <a href='edit_patient.php?id=" . $row['patient_id'] . "' 
-                                   style='color: #9A6F77; font-weight: bold; text-decoration: none; margin-right: 10px;'>
-                                   Edit
-                                </a>
-                                <a href='delete_patient.php?id=" . $row['patient_id'] . "' 
-                                   style='color: #9A6F77; font-weight: bold; text-decoration: none;'
-                                   onclick='return confirm(\"Are you sure you want to delete this record?\")'>
-                                   Delete
-                                </a>
-                            </td>
-                          </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='5'>No records found. Click '+ Add New Patient' to start!</td></tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
 </div>
 
 </body>
