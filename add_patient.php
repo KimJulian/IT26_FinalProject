@@ -8,14 +8,16 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Patient - HealthFile</title>
+    <title>Add New Patient - HealthFile</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; padding: 50px; }
-        .form-card { background: white; padding: 30px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { background-color: #9A6F77; color: white; border: none; cursor: pointer; font-weight: bold; }
-        button:hover { background-color: #7d5a61; }
-        .back-link { text-align: center; display: block; margin-top: 15px; color: #9A6F77; text-decoration: none; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; padding-top: 50px; }
+        .form-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 400px; }
+        h2 { color: #9A6F77; margin-top: 0; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { background: #9A6F77; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .back-link { display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -26,20 +28,39 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
     <label>Patient Name:</label>
     <input type="text" name="patient_name" placeholder="Full Name" required>
 
-    <label>Course:</label>
-    <input type="text" name="course" placeholder="e.g., BSIT" required>
+    <div class="form-group">
+            <label>Course:</label>
+            <select name="course" required>
+                <option value="" disabled selected>Select Department</option>
+                <option value="ICS">ICS (Institute for Computer Studies)</option>
+                <option value="IBM">IBM (Institute for Business Management)</option>
+                <option value="ITE">ITE (Institute for Teacher Education)</option>
+            </select>
+        </div>
 
-    <label>School Year:</label>
-    <input type="text" name="school_year" placeholder="e.g., 2025-2026" required>
+        <div class="form-group">
+            <label>School Year:</label>
+            <select name="school_year" required>
+                <option value="" disabled selected>Select School Year</option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+            </select>
+        </div>
 
     <label>Date Recorded:</label>
     <input type="date" name="date_recorded" required>
 
-    <label>Diagnosis:</label>
-    <input type="text" name="diagnosis" placeholder="Patient condition" required>
+    <div class="form-group">
+            <label>Diagnosis:</label>
+            <input type="text" name="diagnosis" placeholder="Patient condition" required>
+        </div>
 
-    <label>Meds Given:</label>
-    <textarea name="meds_given" placeholder="List medications provided (e.g., Paracetamol in blister pack)"></textarea>
+        <div class="form-group">
+            <label>Meds Given:</label>
+            <textarea name="meds_given" rows="3" placeholder="List medications provided"></textarea>
+        </div>
 
     <label>Assigned Doctor:</label>
     <select name="doctor_id" required>
@@ -51,15 +72,8 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
         ?>
     </select>
 
-    <label>Status:</label>
-    <select name="status">
-        <option value="Active">Active</option>
-        <option value="Discharged">Discharged</option>
-    </select>
-
-    <button type="submit" style="background-color: #9A6F77; color: white; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px;">
-        Save Patient Record
-    </button>
+    <button type="submit">Save Patient Record</button>
+        <a href="dashboard.php" class="back-link">Cancel and Go Back</a>
 </form>
     <a href="dashboard.php" class="back-link">Back to Dashboard</a>
 </div>
