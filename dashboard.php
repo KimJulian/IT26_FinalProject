@@ -8,24 +8,36 @@ if (!isset($_SESSION['user'])) {
 
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
-$totalPatients = $conn->query("SELECT * FROM patients")->num_rows;
-$newToday = $conn->query("SELECT * FROM patients WHERE DATE(date_recorded) = CURDATE()")->num_rows;
-
-
 $course_data = $conn->query("SELECT course, COUNT(*) as count FROM patients GROUP BY course");
 $courses = []; $course_counts = [];
-while($row = $course_data->fetch_assoc()){
-    $courses[] = $row['course'];
-    $course_counts[] = $row['count'];
+while($c_row = $course_data->fetch_assoc()){
+    $courses[] = $c_row['course'];
+    $course_counts[] = $c_row['count'];
 }
 
 $year_data = $conn->query("SELECT school_year, COUNT(*) as count FROM patients GROUP BY school_year");
 $years = []; $year_counts = [];
-while($row = $year_data->fetch_assoc()){
-    $years[] = $row['school_year'];
-    $year_counts[] = $row['count'];
+while($y_row = $year_data->fetch_assoc()){
+    $years[] = $y_row['school_year'];
+    $year_counts[] = $y_row['count'];
 }
-?>
+
+$sql = "SELECT * FROM patients";
+$result = $conn->query($sql);
+
+while($row = $result->fetch_assoc()): 
+    $nameParts = explode(' ', $row['patient_name']);
+    $firstName = $nameParts[0];
+    $middleInitial = (count($nameParts) > 2) ? $nameParts[1] : ""; 
+    $lastName = end($nameParts);
+?> <tr>
+    <td><?php echo $row['patient_id']; ?></td>
+    <td><?php echo htmlspecialchars($firstName); ?></td>
+    <td><?php echo htmlspecialchars($middleInitial); ?></td> 
+    <td><?php echo htmlspecialchars($lastName); ?></td>
+</tr>
+
+<?php endwhile; ?>
 
 <!DOCTYPE html>
 <html lang="en">
