@@ -40,9 +40,16 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 <body>
 
 <div class="sidebar">
-    <h2>Clinic Admin</h2>
-    <p>Welcome, <?php echo $_SESSION['user']; ?>!</p>
-    <a href="logout.php" class="logout-btn">Logout</a>
+    <h2>HealthFile</h2>
+    <ul>
+        <li><a href="dashboard.php">About Us</a></li>
+        <li><a href="#">Appointments</a></li>
+        <li><a href="#">Available Med/Capsule</a></li>
+    </ul>
+    <div class="user-profile">
+        <p>👤 Dr. Dela Cruz</p>
+        <a href="logout.php" style="font-size: 0.8rem; opacity: 0.8; color: white;">Logout</a>
+    </div>
 </div>
 
 <div class="main-content">
