@@ -158,27 +158,33 @@ while($row = $year_data->fetch_assoc()){
 
 </body>
 <script>
-    const ctx = document.getElementById('statusChart').getContext('2d');
-    const statusChart = new Chart(ctx, {
-        type: 'pie', 
+    const courseCtx = document.getElementById('courseChart').getContext('2d');
+    new Chart(courseCtx, {
+        type: 'bar',
         data: {
-            labels: ['Active', 'Discharged'],
+            labels: <?php echo json_encode($courses); ?>,
             datasets: [{
-                label: 'Number of Patients',
-                data: [
-                    <?php 
-                        $active = $conn->query("SELECT * FROM patients WHERE status='Active'")->num_rows;
-                        $discharged = $conn->query("SELECT * FROM patients WHERE status='Discharged'")->num_rows;
-                        echo "$active, $discharged";
-                    ?>
-                ],
-                backgroundColor: ['#9A6F77', '#C8A2C8'],
+                label: 'Student Count',
+                data: <?php echo json_encode($course_counts); ?>,
+                backgroundColor: '#9A6F77',
+                borderRadius: 5
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+
+    const yearCtx = document.getElementById('yearChart').getContext('2d');
+    new Chart(yearCtx, {
+        type: 'pie',
+        data: {
+            labels: <?php echo json_encode($years); ?>,
+            datasets: [{
+                data: <?php echo json_encode($year_counts); ?>,
+                backgroundColor: ['#9A6F77', '#C8A2C8', '#7d5a61', '#b38b93'],
                 borderWidth: 1
             }]
         },
-        options: {
-            responsive: true
-        }
+        options: { responsive: true }
     });
 </script>
 </html>
