@@ -90,7 +90,11 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
                     <th>Firstname</th>
                     <th>Middle</th>
                     <th>Lastname</th>
+                    <th>Course</th>
+                    <th>Year</th>
+                    <th>Date</th>
                     <th>Diagnosis</th>
+                    <th>Meds</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -109,7 +113,11 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
                     <td><?php echo htmlspecialchars($firstName); ?></td>
                     <td>M.</td>
                     <td><?php echo htmlspecialchars($lastName); ?></td>
+                    <td><?php echo htmlspecialchars($row['course']); ?></td>
+                    <td><?php echo htmlspecialchars($row['school_year']); ?></td>
+                    <td><?php echo htmlspecialchars($row['date_recorded']); ?></td>
                     <td><?php echo htmlspecialchars($row['diagnosis']); ?></td>
+                    <td><?php echo htmlspecialchars($row['meds_given']); ?></td>
                     <td><?php echo htmlspecialchars($row['status']); ?></td>
                     <td>
                         <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77; font-weight: bold; text-decoration: none;">Update</a>
