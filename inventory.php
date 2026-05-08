@@ -78,7 +78,12 @@ $result = $conn->query($sql);
                 </td>
                 <td><?php echo $item['expiry_date']; ?></td>
                 <td>
-                    <a href="edit_item.php?id=<?php echo $item['item_id']; ?>" style="color: #9A6F77; text-decoration: none; font-weight: bold;">Edit</a>
+                    <a href="edit_item.php?id=<?php echo $item['item_id']; ?>" 
+                    style="color: #9A6F77; text-decoration: none; font-weight: bold;">Edit</a>
+                    &nbsp; | &nbsp;
+                    <a href="delete_item.php?id=<?php echo $item['item_id']; ?>" 
+                    style="color: #d9534f; text-decoration: none; font-weight: bold;" 
+                    onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                 </td>
             </tr>
             <?php endwhile; ?>
