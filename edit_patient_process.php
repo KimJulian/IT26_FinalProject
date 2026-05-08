@@ -19,8 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             school_year='$sy', 
             date_recorded='$date', 
             diagnosis='$diagnosis', 
-            meds_given='$meds', 
-            status='$status' 
+            meds_given='$meds',
             WHERE patient_id=$id";
 
     if ($conn->query($sql) === TRUE) {

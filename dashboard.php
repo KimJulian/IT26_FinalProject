@@ -9,7 +9,6 @@ if (!isset($_SESSION['user'])) {
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
 $totalPatients = $conn->query("SELECT * FROM patients")->num_rows;
-$activeCases = $conn->query("SELECT * FROM patients WHERE status='Active'")->num_rows;
 $newToday = $conn->query("SELECT * FROM patients WHERE DATE(date_recorded) = CURDATE()")->num_rows;
 
 

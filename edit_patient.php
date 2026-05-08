@@ -85,12 +85,6 @@ $patient = $result->fetch_assoc();
         <label>Meds Given:</label>
         <textarea name="meds_given"><?php echo htmlspecialchars($patient['meds_given']); ?></textarea>
 
-        <label>Status:</label>
-        <select name="status">
-            <option value="Active" <?php if($patient['status'] == 'Active') echo 'selected'; ?>>Active</option>
-            <option value="Discharged" <?php if($patient['status'] == 'Discharged') echo 'selected'; ?>>Discharged</option>
-        </select>
-
         <button type="submit">Update Record</button>
     </form>
     <a href="dashboard.php" class="back-link">Cancel</a>
