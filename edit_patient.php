@@ -4,7 +4,8 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
 $id = $_GET['id'];
-$patient = $conn->query("SELECT * FROM patients WHERE patient_id = $id")->fetch_assoc();
+$result = $conn->query("SELECT * FROM patients WHERE patient_id = $id");
+$row = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +29,21 @@ $patient = $conn->query("SELECT * FROM patients WHERE patient_id = $id")->fetch_
         
         <label>Patient Name:</label>
         <input type="text" name="patient_name" value="<?php echo htmlspecialchars($patient['patient_name']); ?>" required>
+        <label>Course:</label>
+
+        <input type="text" name="course" value="<?php echo $row['course']; ?>" required>
+
+        <label>School Year:</label>
+        <input type="text" name="school_year" value="<?php echo $row['school_year']; ?>" required>
+
+         <label>Date Recorded:</label>
+        <input type="date" name="date_recorded" value="<?php echo $row['date_recorded']; ?>" required>
 
         <label>Diagnosis:</label>
         <input type="text" name="diagnosis" value="<?php echo htmlspecialchars($patient['diagnosis']); ?>" required>
+
+        <label>Meds Given:</label>
+        <textarea name="meds_given"><?php echo $row['meds_given']; ?></textarea>
 
         <label>Status:</label>
         <select name="status">
