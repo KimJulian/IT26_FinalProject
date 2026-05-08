@@ -91,7 +91,7 @@ while($row = $result->fetch_assoc()):
         </li>
     </ul>
 
-    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; margin-bottom: 20px;">
+    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; margin-bottom: 50px;"> 
         <a href="logout.php" style="color: #ffb3b3; text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: bold;">
             <span>🚪</span> Logout
         </a>
