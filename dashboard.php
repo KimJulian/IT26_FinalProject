@@ -42,7 +42,7 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 <div class="sidebar">
     <h2>HealthFile</h2>
     <ul>
-        <li><a href="dashboard.php">About Us</a></li>
+        <li><a href="about.php">About Us</a></li>
         <li><a href="#">Appointments</a></li>
         <li><a href="#">Available Med/Capsule</a></li>
     </ul>
