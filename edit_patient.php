@@ -55,11 +55,17 @@ $patient = $result->fetch_assoc();
         <label>Patient Name:</label>
         <input type="text" name="patient_name" value="<?php echo htmlspecialchars($patient['patient_name']); ?>" required>
 
-        <label>Course:</label>
-        <input type="text" name="course" value="<?php echo htmlspecialchars($patient['course']); ?>" required>
+        <div class="form-group">
+         <label>Course:</label>
+          <select name="course" required>
+           <option value="" disabled>Select Department</option>
+           <option value="ICS" <?php if($patient['course'] == 'ICS') echo 'selected'; ?>>ICS (Institute for Computer Studies)</option>
+           <option value="IBM" <?php if($patient['course'] == 'IBM') echo 'selected'; ?>>IBM (Institute for Business Management)</option>
+           <option value="ITE" <?php if($patient['course'] == 'ITE') echo 'selected'; ?>>ITE (Institute for Teacher Education)</option>
+         </select>
+        </div>
 
-        <label>School Year:</label>
-        <input type="text" name="school_year" value="<?php echo htmlspecialchars($patient['school_year']); ?>" required>
+        
 
         <label>Date Recorded:</label>
         <input type="date" name="date_recorded" value="<?php echo $patient['date_recorded']; ?>" required>
