@@ -133,7 +133,7 @@ while($row = $year_data->fetch_assoc()){
                 <tr>
                     <td><?php echo $row['patient_id']; ?></td>
                     <td><?php echo htmlspecialchars($firstName); ?></td>
-                    <td>M.</td>
+                    <td><?php echo htmlspecialchars($row['middle_name']); ?></td>
                     <td><?php echo htmlspecialchars($lastName); ?></td>
                     <td><?php echo htmlspecialchars($row['course']); ?></td>
                     <td><?php echo htmlspecialchars($row['school_year']); ?></td>
