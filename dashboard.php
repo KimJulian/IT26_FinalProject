@@ -42,9 +42,9 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 <div class="sidebar">
     <h2>HealthFile</h2>
     <ul>
-        <li><a href="about.php">About Us</a></li>
-        <li><a href="#">Appointments</a></li>
-        <li><a href="#">Available Med/Capsule</a></li>
+        <li><a href="about.php">👥 About Us</a></li>
+        <li><a href="appointments.php">📅 Appointments</a></li>
+        <li><a href="inventory.php">💊 Available Med/Capsule</a></li>
     </ul>
     <div class="user-profile">
         <p>👤 Dr. Dela Cruz</p>
