@@ -5,7 +5,7 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
 $id = $_GET['id'];
 $result = $conn->query("SELECT * FROM patients WHERE patient_id = $id");
-$row = $result->fetch_assoc();
+$patient = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
