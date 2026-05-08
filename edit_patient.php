@@ -65,7 +65,16 @@ $patient = $result->fetch_assoc();
          </select>
         </div>
 
-        
+        <div class="form-group">
+         <label>School Year:</label>
+          <select name="school_year" required>
+           <option value="" disabled>Select Year Level</option>
+           <option value="1st Year" <?php if($patient['school_year'] == '1st Year') echo 'selected'; ?>>1st Year</option>
+           <option value="2nd Year" <?php if($patient['school_year'] == '2nd Year') echo 'selected'; ?>>2nd Year</option>
+           <option value="3rd Year" <?php if($patient['school_year'] == '3rd Year') echo 'selected'; ?>>3rd Year</option>
+           <option value="4th Year" <?php if($patient['school_year'] == '4th Year') echo 'selected'; ?>>4th Year</option>
+          </select>
+        </div>
 
         <label>Date Recorded:</label>
         <input type="date" name="date_recorded" value="<?php echo $patient['date_recorded']; ?>" required>
