@@ -99,16 +99,20 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
                 <?php
                 $sql = "SELECT * FROM patients";
                 $result = $conn->query($sql);
-                while($row = $result->fetch_assoc()): ?>
+                while($row = $result->fetch_assoc()): 
+                    $nameParts = explode(' ', $row['patient_name']);
+                    $firstName = $nameParts[0];
+                    $lastName = end($nameParts);
+                ?>
                 <tr>
                     <td><?php echo $row['patient_id']; ?></td>
-                    <td><?php echo explode(' ', $row['patient_name'])[0]; ?></td>
+                    <td><?php echo htmlspecialchars($firstName); ?></td>
                     <td>M.</td>
-                    <td><?php echo end(explode(' ', $row['patient_name'])); ?></td>
-                    <td><?php echo $row['diagnosis']; ?></td>
-                    <td><?php echo $row['status']; ?></td>
+                    <td><?php echo htmlspecialchars($lastName); ?></td>
+                    <td><?php echo htmlspecialchars($row['diagnosis']); ?></td>
+                    <td><?php echo htmlspecialchars($row['status']); ?></td>
                     <td>
-                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77; text-decoration: none; font-weight: bold;">Update</a>
+                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77; font-weight: bold; text-decoration: none;">Update</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
