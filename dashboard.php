@@ -181,8 +181,12 @@ while($row = $result->fetch_assoc()):
                     <td><?php echo htmlspecialchars($row['date_recorded']); ?></td>
                     <td><?php echo htmlspecialchars($row['diagnosis']); ?></td>
                     <td><?php echo htmlspecialchars($row['meds_given']); ?></td>
-                    <td>
-                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77; font-weight: bold; text-decoration: none;">Update</a>
+                    <td style="display: flex; gap: 10px;">
+                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" 
+                           style="color: #9A6F77; font-weight: bold; text-decoration: none;">Update</a>   
+                        <a href="delete.php?id=<?php echo $row['patient_id']; ?>" 
+                           style="color: #d9534f; font-weight: bold; text-decoration: none;" 
+                           onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
