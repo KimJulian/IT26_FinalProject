@@ -49,19 +49,76 @@ while($y_row = $year_data->fetch_assoc()){
             min-height: 100vh;
         }
 
-        .chart-row { display: flex; gap: 20px; margin-bottom: 25px; }
-        .chart-card { background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77; }
-        .chart-card h3 { margin-top: 0; color: #666; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        .chart-row { 
+            display: flex; 
+            gap: 20px; 
+            margin-bottom: 25px; 
+        }
+        .chart-card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            flex: 1; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            border-top: 4px solid #9A6F77; 
+        }
+        .chart-card h3 { 
+            margin-top: 0; 
+            color: #666; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
 
-        .table-container { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .btn-add { background: #9A6F77; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: bold; transition: 0.3s; }
-        .btn-add:hover { background: #7d5a61; }
+        .table-container { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        .table-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+        }
+        .btn-add { 
+            background: #9A6F77; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            font-weight: bold; 
+            transition: 0.3s; 
+        }
+        .btn-add:hover { 
+            background: #7d5a61; 
+        }
 
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; background: #f8f9fa; padding: 15px; border-bottom: 2px solid #dee2e6; font-size: 0.85rem; color: #333; }
-        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.9rem; color: #555; }
-        .action-links a { font-weight: bold; text-decoration: none; font-size: 0.85rem; }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        th { 
+            text-align: left; 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-bottom: 2px solid #dee2e6; 
+            font-size: 0.85rem; 
+            color: #333; 
+        }
+        td { 
+            padding: 15px; 
+            border-bottom: 1px solid #eee; 
+            font-size: 0.9rem; 
+            color: #555; 
+        }
+        .action-links a { 
+            font-weight: bold; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+        }
     </style>
 </head>
 <body>
@@ -151,7 +208,8 @@ while($y_row = $year_data->fetch_assoc()){
                     <td><?php echo htmlspecialchars($row['diagnosis']); ?></td>
                     <td><?php echo htmlspecialchars($row['meds_given']); ?></td>
                     <td class="action-links" style="display: flex; gap: 10px;">
-                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77;">Update</a> 
+                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77;">Update</a>
+                        &nbsp; | &nbsp; 
                         <a href="delete.php?id=<?php echo $row['patient_id']; ?>" style="color: #d9534f;" onclick="return confirm('Delete this record?');">Delete</a>
                     </td>
                 </tr>
