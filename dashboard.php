@@ -88,16 +88,18 @@ while($row = $year_data->fetch_assoc()){
     <?php endif; ?>
 
     <div class="chart-row" style="display: flex; gap: 20px; margin-bottom: 25px;">
-    <div class="chart-card" style="background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77;">
-        <h3 style="margin-top: 0; color: #666; font-size: 0.9rem;">STUDENTS BY INSTITUTE</h3>
-        <canvas id="courseChart" height="120"></canvas>
-    </div>
+        <div class="chart-card" style="background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77;">
+            <h3 style="margin-top: 0; color: #666; font-size: 0.9rem;">STUDENTS BY INSTITUTE</h3>
+            <canvas id="courseChart" height="120"></canvas>
+        </div>
 
-    <div class="chart-card" style="background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77;">
-        <h3 style="margin-top: 0; color: #666; font-size: 0.9rem;">YEAR LEVEL DISTRIBUTION</h3>
-        <canvas id="yearChart" height="120"></canvas>
+        <div class="chart-card" style="background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #9A6F77; height: 300px; overflow: hidden;">
+            <h3 style="margin-top: 0; color: #666; font-size: 0.9rem;">YEAR LEVEL DISTRIBUTION</h3>
+            <div style="position: relative; height: 220px; width: 100%;">
+                <canvas id="yearChart"></canvas>
+            </div>
+        </div>
     </div>
-</div>
     <div class="table-container">
         <div class="table-header">
             <a href="add_patient.php" class="btn-add">+ Add Record</a>
@@ -166,18 +168,30 @@ while($row = $year_data->fetch_assoc()){
     options: { maintainAspectRatio: false }
 });
 
-    const yearCtx = document.getElementById('yearChart').getContext('2d');
-    new Chart(yearCtx, {
-        type: 'pie',
-        data: {
-            labels: <?php echo json_encode($years); ?>,
-            datasets: [{
-                data: <?php echo json_encode($year_counts); ?>,
-                backgroundColor: ['#9A6F77', '#C8A2C8', '#7d5a61', '#b38b93'],
-                borderWidth: 1
-            }]
-        },
-        options: { responsive: true }
-    });
+   const yearCtx = document.getElementById('yearChart').getContext('2d');
+new Chart(yearCtx, {
+    type: 'pie',
+    data: {
+        labels: <?php echo json_encode($years); ?>,
+        datasets: [{
+            data: <?php echo json_encode($year_counts); ?>,
+            backgroundColor: ['#9A6F77', '#C8A2C8', '#7d5a61', '#b38b93'],
+            borderWidth: 1
+        }]
+    },
+    options: { 
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    boxWidth: 12,
+                    padding: 10
+                }
+            }
+        }
+    }
+});
 </script>
 </html>
