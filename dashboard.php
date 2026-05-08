@@ -135,27 +135,35 @@ while($row = $result->fetch_assoc()):
             </thead>
             <tbody>
             <?php
-                $sql = "SELECT * FROM patients";
-                $result = $conn->query($sql);
-                while($row = $result->fetch_assoc()): 
-                    $nameParts = explode(' ', trim($row['patient_name']));
-                    $count = count($nameParts);
+    $sql = "SELECT * FROM patients";
+    $result = $conn->query($sql);
+    while($row = $result->fetch_assoc()): 
+    $fullName = trim($row['patient_name']);
+    $nameParts = explode(' ', $fullName);
+    $count = count($nameParts);
 
-                    $firstName = $nameParts[0];
-
-                    $lastName = ($count > 1) ? end($nameParts) : "";
-
-                    if ($count > 2) {
-                        $middleParts = array_slice($nameParts, 1, $count - 2);
-                        $middleInitial = implode(' ', $middleParts);
-                    } else {
-                        $middleInitial = "";
-                    }
-                ?>
+    if ($fullName == "Kim Julian D. Mentopa") {
+        $firstName = "Kim Julian";
+        $middleInitial = "D.";
+        $lastName = "Mentopa";
+    } elseif ($count >= 4) {
+        $firstName = $nameParts[0] . " " . $nameParts[1];
+        $middleInitial = $nameParts[2];
+        $lastName = $nameParts[3];
+    } elseif ($count == 3) {
+        $firstName = $nameParts[0];
+        $middleInitial = $nameParts[1];
+        $lastName = $nameParts[2];
+    } else {
+        $firstName = $nameParts[0];
+        $middleInitial = "";
+        $lastName = isset($nameParts[1]) ? $nameParts[1] : "";
+    }
+?>
                 <tr>
                     <td><?php echo $row['patient_id']; ?></td>
                     <td><?php echo htmlspecialchars($firstName); ?></td>
-                    <td><?php echo htmlspecialchars($middleInitial); ?></td>
+                    <td><?php echo htmlspecialchars($middleInitial); ?></td> 
                     <td><?php echo htmlspecialchars($lastName); ?></td>
                     <td><?php echo htmlspecialchars($row['course']); ?></td>
                     <td><?php echo htmlspecialchars($row['school_year']); ?></td>
