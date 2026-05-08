@@ -58,7 +58,7 @@ $patient = $result->fetch_assoc();
         <div class="form-group">
          <label>Course:</label>
           <select name="course" required>
-           <option value="" disabled>Select Department</option>
+           <option value="" disabled <?php if(empty($patient['course'])) echo 'selected'; ?>>Select Department</option>
            <option value="ICS" <?php if($patient['course'] == 'ICS') echo 'selected'; ?>>ICS (Institute for Computer Studies)</option>
            <option value="IBM" <?php if($patient['course'] == 'IBM') echo 'selected'; ?>>IBM (Institute for Business Management)</option>
            <option value="ITE" <?php if($patient['course'] == 'ITE') echo 'selected'; ?>>ITE (Institute for Teacher Education)</option>
@@ -68,7 +68,7 @@ $patient = $result->fetch_assoc();
         <div class="form-group">
          <label>School Year:</label>
           <select name="school_year" required>
-           <option value="" disabled>Select Year Level</option>
+           <option value="" disabled <?php if(empty($patient['school_year'])) echo 'selected'; ?>>Select School Year</option>
            <option value="1st Year" <?php if($patient['school_year'] == '1st Year') echo 'selected'; ?>>1st Year</option>
            <option value="2nd Year" <?php if($patient['school_year'] == '2nd Year') echo 'selected'; ?>>2nd Year</option>
            <option value="3rd Year" <?php if($patient['school_year'] == '3rd Year') echo 'selected'; ?>>3rd Year</option>
