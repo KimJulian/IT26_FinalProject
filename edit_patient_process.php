@@ -6,10 +6,22 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['patient_id'];
     $name = $_POST['patient_name'];
+    $course = $_POST['course'];
+    $sy = $_POST['school_year'];
+    $date = $_POST['date_recorded'];
     $diagnosis = $_POST['diagnosis'];
+    $meds = $_POST['meds_given'];
     $status = $_POST['status'];
 
-    $sql = "UPDATE patients SET patient_name='$name', diagnosis='$diagnosis', status='$status' WHERE patient_id=$id";
+    $sql = "UPDATE patients SET 
+            patient_name='$name', 
+            course='$course', 
+            school_year='$sy', 
+            date_recorded='$date', 
+            diagnosis='$diagnosis', 
+            meds_given='$meds', 
+            status='$status' 
+            WHERE patient_id=$id";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: dashboard.php?msg=UpdatedSuccessfully");
