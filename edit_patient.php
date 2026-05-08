@@ -29,21 +29,21 @@ $patient = $result->fetch_assoc();
         
         <label>Patient Name:</label>
         <input type="text" name="patient_name" value="<?php echo htmlspecialchars($patient['patient_name']); ?>" required>
-        <label>Course:</label>
 
-        <input type="text" name="course" value="<?php echo $row['course']; ?>" required>
+        <label>Course:</label>
+        <input type="text" name="course" value="<?php echo htmlspecialchars($patient['course']); ?>" required>
 
         <label>School Year:</label>
-        <input type="text" name="school_year" value="<?php echo $row['school_year']; ?>" required>
+        <input type="text" name="school_year" value="<?php echo htmlspecialchars($patient['school_year']); ?>" required>
 
-         <label>Date Recorded:</label>
-        <input type="date" name="date_recorded" value="<?php echo $row['date_recorded']; ?>" required>
+        <label>Date Recorded:</label>
+        <input type="date" name="date_recorded" value="<?php echo $patient['date_recorded']; ?>" required>
 
         <label>Diagnosis:</label>
         <input type="text" name="diagnosis" value="<?php echo htmlspecialchars($patient['diagnosis']); ?>" required>
 
         <label>Meds Given:</label>
-        <textarea name="meds_given"><?php echo $row['meds_given']; ?></textarea>
+        <textarea name="meds_given"><?php echo htmlspecialchars($patient['meds_given']); ?></textarea>
 
         <label>Status:</label>
         <select name="status">
