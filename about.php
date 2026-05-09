@@ -70,7 +70,7 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
     <ul>
         <li><a href="dashboard.php">🏠 Dashboard</a></li>
         <li><a href="about.php" style="background: rgba(255,255,255,0.2); padding-left: 10px; border-radius: 5px;">ℹ️ About Us</a></li>
-        <li><a href="#">💊 Available Meds</a></li>
+        <li><a href="inventory.php">💊 Available Meds</a></li>
     </ul>
 </div>
 

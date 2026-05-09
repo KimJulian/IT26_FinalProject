@@ -224,10 +224,12 @@ while($y_row = $year_data->fetch_assoc()){
                 <?php
                 $sql = "SELECT * FROM patients";
                 $result = $conn->query($sql);
-                while($row = $result->fetch_assoc()): 
-                    $fullName = trim($row['patient_name']);
-                    $nameParts = explode(' ', $fullName);
-                    $count = count($nameParts);
+
+                if ($result->num_rows > 0): 
+                    while($row = $result->fetch_assoc()): 
+                        $fullName = trim($row['patient_name']);
+                        $nameParts = explode(' ', $fullName);
+                        $count = count($nameParts);
 
                     if ($fullName == "Kim Julian D. Mentopa") {
                         $firstName = "Kim Julian"; $middleInitial = "D."; $lastName = "Mentopa";
@@ -262,6 +264,13 @@ while($y_row = $year_data->fetch_assoc()){
                     </td>
                 </tr>
                 <?php endwhile; ?>
+                <tr>
+                    <td colspan="10" style="text-align: center; padding: 50px; color: #7a7a7a;">
+                        <div style="font-size: 24px; margin-bottom: 10px;">📋</div>
+                        <p style="font-style: italic; margin: 0;">No student records have been found in the HealthFile system.</p>
+                    </td>
+                </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
