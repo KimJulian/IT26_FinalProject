@@ -15,21 +15,78 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Inventory - HealthFile</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background-color: #f4f4f4; }
-        
-        .sidebar { width: 250px; background-color: #9A6F77; color: white; height: 100vh; padding: 20px; position: fixed; left: 0; top: 0; display: flex; flex-direction: column; box-sizing: border-box; }
-        .sidebar a { color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-weight: 500; }
-        
-        .container { margin-left: 250px; padding: 40px; width: calc(100% - 250px); box-sizing: border-box; }
-        
-        .table-container { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .status-low { color: #d9534f; font-weight: bold; } /* Red for low stock */
-        .status-ok { color: #5cb85c; font-weight: bold; }  /* Green for healthy stock */
-        
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; background: #f8f9fa; padding: 15px; border-bottom: 2px solid #dee2e6; font-size: 0.85rem; }
-        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-        .btn-add { background: #9A6F77; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+        body { 
+            font-family: 'Segoe UI', 
+            sans-serif; 
+            margin: 0; 
+            display: flex;
+            background-color: #f4f4f4; 
+        }
+        .sidebar { 
+            width: 250px; 
+            background-color: #9A6F77; 
+            color: white; height: 100vh; 
+            padding: 20px; 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
+            display: flex; 
+            flex-direction: column; 
+            box-sizing: border-box; 
+        }
+        .sidebar a { 
+            color: white; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            margin-bottom: 15px; 
+            font-weight: 500; 
+        }
+        .container { 
+            margin-left: 250px; 
+            padding: 40px; 
+            width: calc(100% - 250px); 
+            box-sizing: border-box; 
+        }
+        .table-container { 
+            background: white;
+            padding: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        .status-low { 
+            color: #d9534f; 
+            font-weight: bold; 
+        }
+        .status-ok { 
+            color: #5cb85c; 
+            font-weight: bold; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        th { 
+            text-align: left; 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-bottom: 2px solid #dee2e6; 
+            font-size: 0.85rem; 
+        }
+        td { 
+            padding: 15px; 
+            border-bottom: 1px solid #eee; 
+            font-size: 0.9rem; 
+        }
+        .btn-add { 
+            background: #9A6F77; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
     </style>
 </head>
 <body>

@@ -9,17 +9,59 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
     <meta charset="UTF-8">
     <title>About Us - HealthFile</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background-color: #f4f4f4; }
-        .sidebar { width: 220px; background-color: #9A6F77; color: white; height: 100vh; padding: 20px; position: fixed; }
-        .sidebar h2 { font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar a { color: white; text-decoration: none; display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; display: flex; 
+            background-color: #f4f4f4; 
+        }
+        .sidebar { 
+            width: 220px; 
+            background-color: #9A6F77; 
+            color: white; height: 100vh; 
+            padding: 20px; 
+            position: fixed; 
+        }
+        .sidebar h2 { 
+            font-size: 1.2rem; 
+            border-bottom: 1px solid rgba(255,255,255,0.3); 
+            padding-bottom: 10px; 
+        }
+        .sidebar ul { 
+            list-style: none; 
+            padding: 0; 
+        }
+        .sidebar a { 
+            color: white; 
+            text-decoration: none; 
+            display: block; 
+            padding: 12px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+        }
         
-        .container { margin-left: 260px; padding: 40px; width: 100%; }
-        .info-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        h1 { color: #9A6F77; }
-        h3 { color: #7d5a61; border-left: 5px solid #9A6F77; padding-left: 10px; }
-        p { line-height: 1.6; color: #444; }
+        .container { 
+            margin-left: 260px; 
+            padding: 40px; 
+            width: 100%; 
+        }
+        .info-card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            margin-bottom: 20px; 
+        }
+        h1 { 
+            color: #9A6F77; 
+        }
+        h3 { 
+            color: #7d5a61; 
+            border-left: 5px solid #9A6F77; 
+            padding-left: 10px; 
+        }
+        p { 
+            line-height: 1.6; 
+            color: #444; 
+        }
     </style>
 </head>
 <body>

@@ -10,14 +10,58 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
     <meta charset="UTF-8">
     <title>Add New Patient - HealthFile</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; padding-top: 50px; }
-        .form-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 400px; }
-        h2 { color: #9A6F77; margin-top: 0; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { background: #9A6F77; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .back-link { display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none; font-size: 0.9rem; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: #f4f4f4; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px; 
+        }
+        .form-card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            width: 400px; 
+        }
+        h2 { 
+            color: #9A6F77; 
+            margin-top: 0; 
+        }
+        .form-group { 
+            margin-bottom: 15px; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold; 
+            color: #555; 
+        }
+        input, select, textarea { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            box-sizing: border-box; 
+        }
+        button { 
+            background: #9A6F77; 
+            color: white; border: none; 
+            padding: 12px; 
+            width: 100%; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 10px; 
+        }
+        .back-link { 
+            display: block; 
+            text-align: center; 
+            margin-top: 15px; 
+            color: #666; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+        }
     </style>
 </head>
 <body>

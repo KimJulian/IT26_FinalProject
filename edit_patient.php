@@ -14,8 +14,19 @@ $patient = $result->fetch_assoc();
     <meta charset="UTF-8">
     <title>Edit Patient - HealthFile</title>
     <style>
-    body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; padding: 50px; }
-    .form-card { background: white; padding: 30px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    body { 
+        font-family: 'Segoe UI', sans-serif; 
+        background-color: #f4f4f4; 
+        padding: 50px; 
+    }
+    .form-card { 
+        background: white; 
+        padding: 30px; 
+        border-radius: 8px; 
+        max-width: 500px; 
+        margin: auto; 
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+    }
     
     .form-group {
         margin-bottom: 15px;
@@ -38,12 +49,28 @@ $patient = $result->fetch_assoc();
         box-sizing: border-box; 
     }
 
-    textarea { font-family: inherit; resize: vertical; }
+    textarea { 
+        font-family: inherit; 
+        resize: vertical; 
+    }
 
-    button { background-color: #9A6F77; color: white; border: none; cursor: pointer; font-weight: bold; }
-    button:hover { background-color: #7d5a61; }
+    button { 
+        background-color: #9A6F77; 
+        color: white; border: none; 
+        cursor: pointer; 
+        font-weight: bold;
+    }
+    button:hover { 
+        background-color: #7d5a61; 
+    }
 
-    .back-link { text-align: center; display: block; margin-top: 15px; color: #9A6F77; text-decoration: none; }
+    .back-link { 
+        text-align: center; 
+        display: block; 
+        margin-top: 15px; 
+        color: #9A6F77; 
+        text-decoration: none; 
+        }
 </style>
 </head>
 <body>

@@ -31,15 +31,58 @@ while($y_row = $year_data->fetch_assoc()){
     <title>Clinic Dashboard - HealthFile</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background-color: #f4f4f4; overflow-x: hidden; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            display: flex; 
+            background-color: #f4f4f4; 
+            overflow-x: hidden; 
+        }
         
-        .sidebar { width: 250px; background-color: #9A6F77; color: white; height: 100vh; padding: 20px; position: fixed; left: 0; top: 0; display: flex; flex-direction: column; box-sizing: border-box; }
-        .sidebar h2 { font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; margin-top: 0; }
-        .sidebar ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
-        .sidebar li { margin-bottom: 15px; }
-        .sidebar a { color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: 500; }
-        .sidebar a:hover { opacity: 0.8; }
-        .logout-section { margin-top: auto; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; margin-bottom: 20px; }
+        .sidebar { 
+            width: 250px; 
+            background-color: #9A6F77; 
+            color: white; 
+            height: 100vh; 
+            padding: 20px; 
+            position: fixed; 
+            left: 0; top: 0; 
+            display: flex; 
+            flex-direction: column; 
+            box-sizing: border-box; 
+        }
+        .sidebar h2 { 
+            font-size: 1.5rem; 
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
+            padding-bottom: 15px; 
+            margin-top: 0; 
+        }
+        .sidebar ul { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            flex-grow: 1; 
+        }
+        .sidebar li { 
+            margin-bottom: 15px; 
+        }
+        .sidebar a { 
+            color: white; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            font-weight: 500; 
+        }
+        .sidebar a:hover { 
+            opacity: 0.8; 
+        }
+        .logout-section { 
+            margin-top: auto; 
+            border-top: 1px solid rgba(255,255,255,0.2); 
+            padding-top: 20px; 
+            margin-bottom: 20px; 
+        }
 
         .container { 
             margin-left: 250px;
