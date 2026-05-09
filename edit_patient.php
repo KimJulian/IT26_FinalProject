@@ -27,19 +27,16 @@ $patient = $result->fetch_assoc();
         margin: auto; 
         box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
     }
-    
     .form-group {
         margin-bottom: 15px;
         display: flex;
         flex-direction: column;
     }
-
     label { 
         font-weight: bold; 
         margin-bottom: 5px; 
         color: #333; 
     }
-
     input, select, textarea, button { 
         width: 100%; 
         padding: 10px; 
@@ -48,12 +45,10 @@ $patient = $result->fetch_assoc();
         border-radius: 5px; 
         box-sizing: border-box; 
     }
-
     textarea { 
         font-family: inherit; 
         resize: vertical; 
     }
-
     button { 
         background-color: #9A6F77; 
         color: white; border: none; 
@@ -63,7 +58,6 @@ $patient = $result->fetch_assoc();
     button:hover { 
         background-color: #7d5a61; 
     }
-
     .back-link { 
         text-align: center; 
         display: block; 

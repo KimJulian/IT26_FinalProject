@@ -4,7 +4,6 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
 
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
-// Fetch all inventory items
 $sql = "SELECT * FROM inventory ORDER BY item_name ASC";
 $result = $conn->query($sql);
 ?>

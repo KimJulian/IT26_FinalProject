@@ -37,7 +37,6 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
             padding: 12px 0; 
             border-bottom: 1px solid rgba(255,255,255,0.1); 
         }
-        
         .container { 
             margin-left: 260px; 
             padding: 40px; 

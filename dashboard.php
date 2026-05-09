@@ -38,7 +38,6 @@ while($y_row = $year_data->fetch_assoc()){
             background-color: #f4f4f4; 
             overflow-x: hidden; 
         }
-        
         .sidebar { 
             width: 250px; 
             background-color: #9A6F77; 

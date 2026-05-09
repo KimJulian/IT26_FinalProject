@@ -101,10 +101,25 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
             <input type="text" name="diagnosis" placeholder="Patient condition" required>
         </div>
 
-        <div class="form-group">
-            <label>Meds Given:</label>
-            <textarea name="meds_given" rows="3" placeholder="List medications provided"></textarea>
-        </div>
+<div class="form-group">
+    <label for="item_id">Medication Given:</label>
+    <select name="item_id" id="item_id" class="form-control" onchange="toggleQuantityField()">
+        <option value="">-- No Medication --</option>
+        <?php
+        $res = $conn->query("SELECT item_id, item_name, stock_quantity FROM inventory WHERE stock_quantity > 0");
+        while($row = $res->fetch_assoc()) {
+            echo "<option value='".$row['item_id']."' data-stock='".$row['stock_quantity']."'>
+            ".$row['item_name']." (In Stock: ".$row['stock_quantity'].")
+          </option>";
+        }
+        ?>
+    </select>
+</div>
+
+<div class="form-group" id="quantity_container" style="display: none;">
+    <label for="quantity_given">Quantity (Tablets/Pieces):</label>
+    <input type="number" name="quantity_given" id="quantity_given" class="form-control" min="1">
+</div>
 
     <label>Assigned Doctor:</label>
     <select name="doctor_id" required>
@@ -123,4 +138,36 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
 </div>
 
 </body>
+<script>
+function toggleQuantityField() {
+    var select = document.getElementById('item_id');
+    var container = document.getElementById('quantity_container');
+    var input = document.getElementById('quantity_given');
+    
+    if (select.value !== "") {
+        container.style.display = "block";
+        input.setAttribute('required', 'required');
+        
+        var selectedOption = select.options[select.selectedIndex];
+        var maxStock = selectedOption.getAttribute('data-stock');
+        
+        input.setAttribute('max', maxStock);
+    } else {
+        container.style.display = "none";
+        input.removeAttribute('required');
+        input.value = "";
+    }
+}
+
+document.getElementById('quantity_given').addEventListener('input', function() {
+    var select = document.getElementById('item_id');
+    var maxStock = parseInt(select.options[select.selectedIndex].getAttribute('data-stock'));
+    var enteredValue = parseInt(this.value);
+
+    if (enteredValue > maxStock) {
+        alert("Error: You only have " + maxStock + " units in stock!");
+        this.value = maxStock;
+    }
+});
+</script>
 </html>
