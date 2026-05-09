@@ -264,6 +264,8 @@ while($y_row = $year_data->fetch_assoc()){
                     </td>
                 </tr>
                 <?php endwhile; ?>
+
+                <?php else: ?>
                 <tr>
                     <td colspan="10" style="text-align: center; padding: 50px; color: #7a7a7a;">
                         <div style="font-size: 24px; margin-bottom: 10px;">📋</div>
