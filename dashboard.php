@@ -250,9 +250,15 @@ while($y_row = $year_data->fetch_assoc()){
                     <td><?php echo htmlspecialchars($row['diagnosis']); ?></td>
                     <td><?php echo htmlspecialchars($row['meds_given']); ?></td>
                     <td class="action-links" style="display: flex; gap: 10px;">
-                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77;">Update</a>
-                        &nbsp; | &nbsp; 
-                        <a href="delete.php?id=<?php echo $row['patient_id']; ?>" style="color: #d9534f;" onclick="return confirm('Delete this record?');">Delete</a>
+                        <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77; text-decoration: none; font-weight: bold;">Update</a>
+    
+                        <span style="color: #ccc;">|</span> 
+    
+                        <a href="delete_patient.php?id=<?php echo $row['patient_id']; ?>" 
+                        onclick="return confirm('Delete this record?');" 
+                        style="color: #d9534f; text-decoration: none; font-weight: bold;">
+                        Delete
+                        </a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
