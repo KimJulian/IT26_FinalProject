@@ -23,6 +23,17 @@ CREATE TABLE patients (
     FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
 );
 
+CREATE TABLE inventory (
+    item_id INT PRIMARY KEY AUTO_INCREMENT,
+    item_name VARCHAR(255) NOT NULL,
+    category ENUM('Medicine','Capsule','Supplies') NOT NULL,
+    stock_quantity INT DEFAULT 0,
+    unit VARCHAR(50) DEFAULT 'pcs',
+    expiry_date DATE,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP
+);
+
 INSERT INTO doctors (doctor_name, specialization) VALUES 
 ('Dr. Juan Dela Cruz', 'Cardiology'),
 ('Dr. Maria Santos', 'Pediatrics');
