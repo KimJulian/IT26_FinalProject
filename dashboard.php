@@ -53,29 +53,38 @@ while($y_row = $year_data->fetch_assoc()){
             font-size: 1.5rem; 
             border-bottom: 1px solid #FFCC00; 
             padding-bottom: 15px; 
-            margin-top: 0;
-            color: #FFCC00; 
+            margin: 0 0 20px 0;
+            color: #FFCC00;
         }
         .sidebar ul { 
             list-style: none; 
             padding: 0; 
             margin: 0; 
-            flex-grow: 1; 
+            flex-grow: 1;
         }
         .sidebar li { 
-            margin-bottom: 15px; 
+            margin-bottom: 8px;
         }
         .sidebar a { 
             color: white; 
             text-decoration: none; 
-            display: flex; 
+            display: flex;
             align-items: center; 
-            gap: 10px; 
+            gap: 12px; 
+            padding: 12px 15px; 
             font-weight: 500; 
+            transition: all 0.3s ease;
+            border-radius: 0 4px 4px 0;
+            margin: 0 5px;
+        }
+        .sidebar a:hover, .sidebar a.active { 
+            background-color: rgba(255, 255, 255, 0.15); 
+            color: white;
+            border-left: none;
         }
         .sidebar a:hover { 
-            background-color: rgba(255, 204, 0, 0.1);
-            color: #FFCC00; 
+            background-color: rgba(255, 204, 0, 0.1); 
+            color: #FFCC00;
         }
         .logout-section { 
             margin-top: auto; 
@@ -169,8 +178,13 @@ while($y_row = $year_data->fetch_assoc()){
 <div class="sidebar">
     <h2>HealthFile</h2>
     <ul>
+        <li>
+            <a href="dashboard.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'dashboard.php') ? 'active' : ''; ?>">
+                📊 Dashboard
+            </a>
+        </li>
         <li><a href="about.php">👥 About Us</a></li>
-        <li><a href="inventory.php">💊 Available Med/Capsule</a></li>
+        <li><a href="inventory.php">💊 Available Meds</a></li>
     </ul>
     <div class="logout-section">
         <a href="logout.php" style="color: white; font-weight: bold">
