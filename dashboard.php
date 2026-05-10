@@ -8,7 +8,6 @@ if (!isset($_SESSION['user'])) {
 
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
-// 1. Fetch Chart Data
 $course_data = $conn->query("SELECT course, COUNT(*) as count FROM patients GROUP BY course");
 $courses = []; $course_counts = [];
 while($c_row = $course_data->fetch_assoc()){
@@ -224,11 +223,13 @@ while($y_row = $year_data->fetch_assoc()){
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT patients.*, inventory.category, inventory.unit 
-                        FROM patients 
-                        LEFT JOIN inventory ON patients.meds_given = inventory.item_name 
-                    ORDER BY patients.date_recorded DESC";
-            
+                $sql = "SELECT p.*, 
+                        GROUP_CONCAT(i.item_name SEPARATOR ', ') AS medicines 
+                        FROM patients p
+                        LEFT JOIN patient_medications pm ON p.patient_id = pm.patient_id
+                        LEFT JOIN inventory i ON pm.item_id = i.item_id
+                        GROUP BY p.patient_id 
+                        ORDER BY p.date_recorded DESC";           
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0): 
@@ -256,7 +257,7 @@ while($y_row = $year_data->fetch_assoc()){
                     <td><?php echo htmlspecialchars($row['school_year']); ?></td>
                     <td><?php echo htmlspecialchars($row['date_recorded']); ?></td>
                     <td><?php echo htmlspecialchars($row['diagnosis']); ?></td>
-                    <td><?php echo htmlspecialchars($row['meds_given']); ?></td>
+                    <td><?php echo htmlspecialchars($row['medicines'] ?? 'None'); ?></td>
                     <td class="action-links" style="display: flex; gap: 10px;">
                         <a href="edit_patient.php?id=<?php echo $row['patient_id']; ?>" style="color: #9A6F77; text-decoration: none; font-weight: bold;">Update</a>
     

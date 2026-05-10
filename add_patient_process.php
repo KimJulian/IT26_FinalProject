@@ -11,37 +11,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $doctor_id = $_POST['doctor_id'];
     $date = date('Y-m-d');
 
-    $item_id = $_POST['item_id']; 
-    $quantity = isset($_POST['quantity_given']) ? (int)$_POST['quantity_given'] : 0;
-
-    $med_name = "None";
-    if (!empty($item_id)) {
-        $get_med = $conn->query("SELECT item_name FROM inventory WHERE item_id = '$item_id'");
-        if ($row = $get_med->fetch_assoc()) {
-            $med_name = $row['item_name'];
-        }
-    }
-
-    $stmt = $conn->prepare("INSERT INTO patients (patient_name, course, school_year, date_recorded, diagnosis, meds_given, item_id, doctor_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Active')");
-
-$stmt->bind_param("ssssssii", $name, $course, $sy, $date, $diagnosis, $med_name, $item_id, $doctor_id);
-
-if ($stmt->execute()) {
-    if (!empty($item_id) && $quantity > 0) {
-        $sql_update_stock = "UPDATE inventory 
-                             SET stock_quantity = stock_quantity - ? 
-                             WHERE item_id = ?";
-        $stmt_stock = $conn->prepare($sql_update_stock);
-        $stmt_stock->bind_param("ii", $quantity, $item_id);
-        $stmt_stock->execute();
-        $stmt_stock->close();
-    }
+    $stmt = $conn->prepare("INSERT INTO patients (patient_name, course, school_year, date_recorded, diagnosis, doctor_id, status) VALUES (?, ?, ?, ?, ?, ?, 'Active')");
+    $stmt->bind_param("sssssi", $name, $course, $sy, $date, $diagnosis, $doctor_id);
     
-    header("Location: dashboard.php?msg=Success");
-    exit();
-} else {
-    echo "Error: " . $stmt->error;
-}
-$stmt->close();
+    if ($stmt->execute()) {
+        $patient_id = $conn->insert_id;
+
+        if (!empty($_POST['item_ids']) && is_array($_POST['item_ids'])) {
+            
+            $med_stmt = $conn->prepare("INSERT INTO patient_medications (patient_id, item_id, quantity_given) VALUES (?, ?, 1)");
+            $update_stock = $conn->prepare("UPDATE inventory SET stock_quantity = stock_quantity - 1 WHERE item_id = ?");
+
+            foreach ($_POST['item_ids'] as $item_id) {
+                if (!empty($item_id)) {
+                    $med_stmt->bind_param("ii", $patient_id, $item_id);
+                    $med_stmt->execute();
+
+                    $update_stock->bind_param("i", $item_id);
+                    $update_stock->execute();
+                }
+            }
+            $med_stmt->close();
+            $update_stock->close();
+        }
+        
+        header("Location: dashboard.php?msg=Success");
+        exit();
+    } else {
+        echo "Error recording patient: " . $stmt->error;
+    }
+    $stmt->close();
 }
 ?>

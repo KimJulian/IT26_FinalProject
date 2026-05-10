@@ -124,18 +124,17 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
         </div>
 
 <div class="form-group">
-    <label for="item_id">Medication Given:</label>
-    <select name="item_id" id="item_id" class="form-control" onchange="toggleQuantityField()">
+    <label>Medication Given:</label>
+    <select name="item_ids[]" multiple class="form-control" style="height: 120px;">
         <option value="">-- No Medication --</option>
         <?php
-        $res = $conn->query("SELECT item_id, item_name, stock_quantity FROM inventory WHERE stock_quantity > 0");
-        while($row = $res->fetch_assoc()) {
-            echo "<option value='".$row['item_id']."' data-stock='".$row['stock_quantity']."'>
-            ".$row['item_name']." (In Stock: ".$row['stock_quantity'].")
-          </option>";
+        $items = $conn->query("SELECT item_id, item_name, stock_quantity FROM inventory WHERE stock_quantity > 0");
+        while($row = $items->fetch_assoc()) {
+            echo "<option value='".$row['item_id']."'>".$row['item_name']." (Stock: ".$row['stock_quantity'].")</option>";
         }
         ?>
     </select>
+    <small>Hold **Ctrl** to select multiple medicines.</small>
 </div>
 
 <div class="form-group" id="quantity_container" style="display: none;">

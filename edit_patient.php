@@ -4,8 +4,20 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
 $conn = new mysqli("localhost", "root", "", "healthfile_db");
 
 $id = $_GET['id'];
-$result = $conn->query("SELECT * FROM patients WHERE patient_id = $id");
+$stmt = $conn->prepare("SELECT * FROM patients WHERE patient_id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 $patient = $result->fetch_assoc();
+
+$assigned_meds = [];
+$med_query = $conn->prepare("SELECT item_id FROM patient_medications WHERE patient_id = ?");
+$med_query->bind_param("i", $id);
+$med_query->execute();
+$med_result = $med_query->get_result();
+while($med_row = $med_result->fetch_assoc()) {
+    $assigned_meds[] = $med_row['item_id'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -132,8 +144,19 @@ $patient = $result->fetch_assoc();
         <label>Diagnosis:</label>
         <input type="text" name="diagnosis" value="<?php echo htmlspecialchars($patient['diagnosis']); ?>" required>
 
+        <div class="form-group">
         <label>Meds Given:</label>
-        <textarea name="meds_given"><?php echo htmlspecialchars($patient['meds_given']); ?></textarea>
+          <select name="item_ids[]" multiple class="form-control" style="height: 120px;">
+              <?php
+              $inventory = $conn->query("SELECT item_id, item_name FROM inventory");
+              while($inv_row = $inventory->fetch_assoc()) {
+                  $selected = in_array($inv_row['item_id'], $assigned_meds) ? 'selected' : '';
+                  echo "<option value='".$inv_row['item_id']."' $selected>".$inv_row['item_name']."</option>";
+                }
+                ?>
+            </select>
+            <small style="color: #003366; margin-top: 5px;">Hold <b>Ctrl</b> (Windows) to select multiple items.</small>
+        </div>
 
         <button type="submit">Update Record</button>
     </form>
