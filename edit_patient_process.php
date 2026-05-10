@@ -16,11 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->query("DELETE FROM patient_medications WHERE patient_id = $patient_id");
 
         if (!empty($_POST['item_ids']) && is_array($_POST['item_ids'])) {
-            $med_stmt = $conn->prepare("INSERT INTO patient_medications (patient_id, item_id, quantity_given) VALUES (?, ?, 1)");
+            $item_ids = $_POST['item_ids'];
+            $quantities = $_POST['quantities'];
+            $med_stmt = $conn->prepare("INSERT INTO patient_medications (patient_id, item_id, quantity_given) VALUES (?, ?, ?)");
             
-            foreach ($_POST['item_ids'] as $item_id) {
-                if (!empty($item_id)) {
-                    $med_stmt->bind_param("ii", $patient_id, $item_id);
+            for ($i = 0; $i < count($item_ids); $i++) {
+                $id = $item_ids[$i];
+                $qty = $quantities[$i];
+
+                if (!empty($id) && $qty > 0) {
+                    $med_stmt->bind_param("iii", $patient_id, $id, $qty);
                     $med_stmt->execute();
                 }
             }

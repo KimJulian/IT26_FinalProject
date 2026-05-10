@@ -7,16 +7,15 @@ $id = $_GET['id'];
 $stmt = $conn->prepare("SELECT * FROM patients WHERE patient_id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
-$result = $stmt->get_result();
-$patient = $result->fetch_assoc();
+$patient = $stmt->get_result()->fetch_assoc();
 
-$assigned_meds = [];
-$med_query = $conn->prepare("SELECT item_id FROM patient_medications WHERE patient_id = ?");
+$current_meds = [];
+$med_query = $conn->prepare("SELECT item_id, quantity_given FROM patient_medications WHERE patient_id = ?");
 $med_query->bind_param("i", $id);
 $med_query->execute();
 $med_result = $med_query->get_result();
-while($med_row = $med_result->fetch_assoc()) {
-    $assigned_meds[] = $med_row['item_id'];
+while ($row = $med_result->fetch_assoc()) {
+    $current_meds[] = $row;
 }
 ?>
 
@@ -145,22 +144,70 @@ while($med_row = $med_result->fetch_assoc()) {
         <input type="text" name="diagnosis" value="<?php echo htmlspecialchars($patient['diagnosis']); ?>" required>
 
         <div class="form-group">
-        <label>Meds Given:</label>
-          <select name="item_ids[]" multiple class="form-control" style="height: 120px;">
-              <?php
-              $inventory = $conn->query("SELECT item_id, item_name FROM inventory");
-              while($inv_row = $inventory->fetch_assoc()) {
-                  $selected = in_array($inv_row['item_id'], $assigned_meds) ? 'selected' : '';
-                  echo "<option value='".$inv_row['item_id']."' $selected>".$inv_row['item_name']."</option>";
-                }
-                ?>
-            </select>
-            <small style="color: #003366; margin-top: 5px;">Hold <b>Ctrl</b> (Windows) to select multiple items.</small>
-        </div>
+    <label>Medications & Quantities:</label>
+    <table class="table" id="medicationTable">
+        <thead>
+            <tr>
+                <th>Medicine</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="medicationBody">
+            <?php if (empty($current_meds)): ?>
+                <tr>
+                    <td>
+                        <select name="item_ids[]" class="form-control">
+                            <option value="">-- Select --</option>
+                            <?php 
+                            $items = $conn->query("SELECT item_id, item_name FROM inventory");
+                            while($inv = $items->fetch_assoc()) echo "<option value='".$inv['item_id']."'>".$inv['item_name']."</option>";
+                            ?>
+                        </select>
+                    </td>
+                    <td><input type="number" name="quantities[]" class="form-control" value="1" min="1"></td>
+                    <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+                </tr>
+            <?php else: ?>
+                <?php foreach ($current_meds as $med): ?>
+                <tr>
+                    <td>
+                        <select name="item_ids[]" class="form-control">
+                            <?php 
+                            $items = $conn->query("SELECT item_id, item_name FROM inventory");
+                            while($inv = $items->fetch_assoc()): 
+                                $selected = ($inv['item_id'] == $med['item_id']) ? 'selected' : '';
+                            ?>
+                                <option value="<?= $inv['item_id'] ?>" <?= $selected ?>><?= $inv['item_name'] ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                    </td>
+                    <td><input type="number" name="quantities[]" class="form-control" value="<?= $med['quantity_given'] ?>" min="1"></td>
+                    <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-info btn-sm" onclick="addRow()">+ Add Another Medicine</button>
+</div>
 
         <button type="submit">Update Record</button>
     </form>
     <a href="dashboard.php" class="back-link">Cancel</a>
 </div>
 </body>
+<script>
+function addRow() {
+    let tbody = document.getElementById('medicationBody');
+    let newRow = tbody.rows[0].cloneNode(true);
+    newRow.querySelectorAll('input').forEach(i => i.value = '1');
+    newRow.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+    tbody.appendChild(newRow);
+}
+function removeRow(btn) {
+    let tbody = document.getElementById('medicationBody');
+    if (tbody.rows.length > 1) btn.closest('tr').remove();
+}
+</script>
 </html>

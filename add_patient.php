@@ -124,17 +124,34 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
         </div>
 
 <div class="form-group">
-    <label>Medication Given:</label>
-    <select name="item_ids[]" multiple class="form-control" style="height: 120px;">
-        <option value="">-- No Medication --</option>
-        <?php
-        $items = $conn->query("SELECT item_id, item_name, stock_quantity FROM inventory WHERE stock_quantity > 0");
-        while($row = $items->fetch_assoc()) {
-            echo "<option value='".$row['item_id']."'>".$row['item_name']." (Stock: ".$row['stock_quantity'].")</option>";
-        }
-        ?>
-    </select>
-    <small>Hold **Ctrl** to select multiple medicines.</small>
+    <label>Medications & Quantities:</label>
+    <table class="table" id="medicationTable">
+        <thead>
+            <tr>
+                <th>Medicine</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="medicationBody">
+            <tr>
+                <td>
+                    <select name="item_ids[]" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <?php
+                        $items = $conn->query("SELECT item_id, item_name, stock_quantity FROM inventory WHERE stock_quantity > 0");
+                        while($row = $items->fetch_assoc()) {
+                            echo "<option value='".$row['item_id']."'>".$row['item_name']." (Stock: ".$row['stock_quantity'].")</option>";
+                        }
+                        ?>
+                    </select>
+                </td>
+                <td><input type="number" name="quantities[]" class="form-control" min="1" value="1" required></td>
+                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-info btn-sm" onclick="addRow()">+ Add Another Medicine</button>
 </div>
 
 <div class="form-group" id="quantity_container" style="display: none;">
@@ -190,5 +207,22 @@ document.getElementById('quantity_given').addEventListener('input', function() {
         this.value = maxStock;
     }
 });
+</script>
+<script>
+function addRow() {
+    let tbody = document.getElementById('medicationBody');
+    let firstRow = tbody.rows[0].cloneNode(true); // Clone the first row
+    firstRow.querySelectorAll('input').forEach(input => input.value = '1'); // Reset quantity
+    tbody.appendChild(firstRow);
+}
+
+function removeRow(btn) {
+    let row = btn.parentNode.parentNode;
+    if (document.getElementById('medicationBody').rows.length > 1) {
+        row.parentNode.removeChild(row);
+    } else {
+        alert("At least one medication row is required.");
+    }
+}
 </script>
 </html>
