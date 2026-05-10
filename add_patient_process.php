@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    $sql = "INSERT INTO patients (patient_name, course, school_year, date_recorded, diagnosis, meds_given, doctor_id, status) 
-            VALUES ('$name', '$course', '$sy', '$date', '$diagnosis', '$med_name', '$doctor_id', 'Active')";
+    $sql = "INSERT INTO patients (patient_name, course, school_year, date_recorded, diagnosis, meds_given, item_id, doctor_id, status) 
+        VALUES ('$name', '$course', '$sy', '$date', '$diagnosis', '$med_name', '$item_id', '$doctor_id', 'Active')";
 
     if ($conn->query($sql) === TRUE) {
         
