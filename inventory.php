@@ -15,16 +15,16 @@ $result = $conn->query($sql);
     <title>Inventory - HealthFile</title>
     <style>
         body { 
-            font-family: 'Segoe UI', 
-            sans-serif; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             margin: 0; 
             display: flex;
-            background-color: #f4f4f4; 
+            background-color: #f0f2f5;
         }
         .sidebar { 
             width: 250px; 
-            background-color: #9A6F77; 
-            color: white; height: 100vh; 
+            background-color: #003366;
+            color: white; 
+            height: 100vh; 
             padding: 20px; 
             position: fixed; 
             left: 0; 
@@ -32,6 +32,17 @@ $result = $conn->query($sql);
             display: flex; 
             flex-direction: column; 
             box-sizing: border-box; 
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
+        }
+        .sidebar h2 {
+            color: #FFCC00;
+            border-bottom: 2px solid #FFCC00; 
+            padding-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
         }
         .sidebar a { 
             color: white; 
@@ -39,8 +50,15 @@ $result = $conn->query($sql);
             display: flex; 
             align-items: center; 
             gap: 10px; 
-            margin-bottom: 15px; 
+            padding: 12px 10px;
+            margin-bottom: 5px; 
             font-weight: 500; 
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background: rgba(255, 204, 0, 0.1);
+            color: #FFCC00;
         }
         .container { 
             margin-left: 250px; 
@@ -50,21 +68,23 @@ $result = $conn->query($sql);
         }
         .table-container { 
             background: white;
-            padding: 25px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border-top: 5px solid #003366; 
         }
         .status-low { 
             color: #d9534f; 
-            font-weight: bold; 
+            font-weight: bold;  
         }
         .status-ok { 
-            color: #5cb85c; 
+            color: #28a745; 
             font-weight: bold; 
         }
         table { 
             width: 100%; 
             border-collapse: collapse; 
+            margin-top: 20px; 
         }
         th { 
             text-align: left; 
@@ -72,19 +92,32 @@ $result = $conn->query($sql);
             padding: 15px; 
             border-bottom: 2px solid #dee2e6; 
             font-size: 0.85rem; 
+            color: #003366;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         td { 
             padding: 15px; 
             border-bottom: 1px solid #eee; 
             font-size: 0.9rem; 
+            color: #333; 
+        }
+        tr:hover td {
+            background-color: #fbfbfb;
         }
         .btn-add { 
-            background: #9A6F77; 
-            color: white; 
-            padding: 10px 20px; 
+            background: #FFCC00;
+            color: #003366;
+            padding: 12px 24px; 
             border-radius: 6px; 
             text-decoration: none; 
             font-weight: bold; 
+            transition: 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        }
+        .btn-add:hover {
+            background: #e6b800;
+            transform: translateY(-1px);
         }
     </style>
 </head>
