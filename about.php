@@ -68,7 +68,7 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
         }
         h3 { 
             color: #555; 
-            border-left: 5px solid #FFCC00; /* NBSC Gold accent bar */
+            border-left: 5px solid #FFCC00;
             padding-left: 15px; 
             margin-bottom: 20px;
             font-size: 1.1rem;
@@ -86,7 +86,7 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
 <div class="sidebar">
     <h2>HealthFile</h2>
     <ul>
-        <li><a href="dashboard.php">🏠 Dashboard</a></li>
+        <li><a href="dashboard.php">📊 Dashboard</a></li>
         <li><a href="about.php" style="background: rgba(255,255,255,0.2); padding-left: 10px; border-radius: 5px;">ℹ️ About Us</a></li>
         <li><a href="inventory.php">💊 Available Meds</a></li>
     </ul>
