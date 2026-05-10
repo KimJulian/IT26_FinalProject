@@ -61,16 +61,19 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
             border-top: 4px solid #003366; 
         }
         h1 { 
-            color: #003366; 
-            margin-top: 0; 
+            color: #003366;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
         h3 { 
-            color: #003366; 
-            border-left: 5px solid #FFCC00;
+            color: #555; 
+            border-left: 5px solid #FFCC00; /* NBSC Gold accent bar */
             padding-left: 15px; 
+            margin-bottom: 20px;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 1px; 
+            letter-spacing: 0.5px; 
         }
         p { 
             line-height: 1.8; 
@@ -91,6 +94,8 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
 
 <div class="container">
     <div class="info-card">
+        <h1>About HealthFile</h1>
+        <h3>Lorem ipsum</h3>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et semper mauris. Aenean dictum, nisi nec porttitor maximus, nunc eros fermentum erat, ac gravida nisl magna at sem. Duis ornare porttitor scelerisque. Donec sapien tellus, facilisis non scelerisque id, ultricies sit amet tortor. Nam id mattis libero, ac malesuada tortor. Praesent nec sagittis massa. Nullam nec metus ipsum. Nam nec pretium velit.
         Aenean vehicula fringilla eros, vitae auctor erat molestie sit amet. Ut velit ante, aliquet ut malesuada in, maximus at magna. Curabitur vulputate consequat auctor. Pellentesque venenatis quam nisi, a interdum sapien mollis sed. Curabitur quis interdum purus. Nunc sit amet ex a dui ultricies aliquet eu a velit. Etiam viverra, dolor auctor ullamcorper dictum, nisl velit tempus quam, quis mattis leo leo eget odio. Aliquam placerat vulputate leo a accumsan. Donec diam diam, efficitur vitae massa in, ullamcorper mattis risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent eu aliquam enim. Mauris eu magna ante.
         Morbi mattis cursus tortor at cursus. Mauris ac ligula neque. Aliquam enim nulla, molestie nec malesuada ac, posuere non elit. Nullam finibus purus et varius rutrum. Sed vel velit ut dolor condimentum ultrices nec ut nisi. Morbi luctus eros ipsum. Nam aliquet nisi tortor, non dictum nibh ullamcorper at. Aenean rutrum cursus ipsum sit amet vulputate. Morbi neque sapien, dapibus at scelerisque eget, finibus at nisi. Integer vulputate erat dui, at mollis arcu tempus quis. Pellentesque volutpat ipsum eget dolor molestie facilisis. Vestibulum orci lacus, iaculis a bibendum id, viverra eu nibh. Sed bibendum odio sed sodales viverra. Sed egestas pharetra molestie. Maecenas velit nulla, imperdiet nec ante id, sodales tempor nisi.
