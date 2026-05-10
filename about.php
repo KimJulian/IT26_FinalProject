@@ -15,16 +15,19 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
             background-color: #f4f4f4; 
         }
         .sidebar { 
-            width: 220px; 
-            background-color: #9A6F77; 
-            color: white; height: 100vh; 
+            width: 250px;
+            background-color: #003366;
+            color: white; 
+            height: 100vh; 
             padding: 20px; 
             position: fixed; 
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
         }
         .sidebar h2 { 
-            font-size: 1.2rem; 
-            border-bottom: 1px solid rgba(255,255,255,0.3); 
-            padding-bottom: 10px; 
+            font-size: 1.5rem; 
+            border-bottom: 2px solid #FFCC00;
+            padding-bottom: 15px; 
+            color: #FFCC00; 
         }
         .sidebar ul { 
             list-style: none; 
@@ -34,31 +37,43 @@ if (!isset($_SESSION['user'])) { header("Location: login.php"); exit(); }
             color: white; 
             text-decoration: none; 
             display: block; 
-            padding: 12px 0; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            padding: 12px 10px; 
+            border-radius: 4px;
+            transition: 0.3s;
+            font-weight: 500; 
+        }
+        .sidebar a:hover { 
+            background-color: rgba(255, 204, 0, 0.1); 
+            color: #FFCC00;
         }
         .container { 
-            margin-left: 260px; 
+            margin-left: 250px; 
             padding: 40px; 
-            width: 100%; 
+            width: calc(100% - 250px); 
+            box-sizing: border-box; 
         }
         .info-card { 
             background: white; 
             padding: 30px; 
             border-radius: 8px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
             margin-bottom: 20px; 
+            border-top: 4px solid #003366; 
         }
         h1 { 
-            color: #9A6F77; 
+            color: #003366; 
+            margin-top: 0; 
         }
         h3 { 
-            color: #7d5a61; 
-            border-left: 5px solid #9A6F77; 
-            padding-left: 10px; 
+            color: #003366; 
+            border-left: 5px solid #FFCC00;
+            padding-left: 15px; 
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px; 
         }
         p { 
-            line-height: 1.6; 
+            line-height: 1.8; 
             color: #444; 
         }
     </style>
