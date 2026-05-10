@@ -97,9 +97,6 @@ $result = $conn->query($sql);
         <li><a href="about.php">👥 About Us</a></li>
         <li><a href="inventory.php" style="background: rgba(255,255,255,0.1); border-radius: 5px; padding: 5px;">💊 Inventory</a></li>
     </ul>
-    <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px;">
-        <a href="logout.php" style="color: #ffb3b3;">🚪 Logout</a>
-    </div>
 </div>
 
 <div class="container">

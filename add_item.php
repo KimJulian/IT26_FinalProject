@@ -30,22 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Add Inventory - HealthFile</title>
    <style>
     body { 
-        font-family: 'Segoe UI', sans-serif; 
-        background-color: #f4f4f4; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background-color: #f0f2f5; 
         display: flex; 
         margin: 0; 
     }
-
     .sidebar { 
         width: 250px; 
-        background-color: #9A6F77; 
+        background-color: #003366;
         color: white; 
         height: 100vh; 
         position: fixed; 
         padding: 20px; 
         box-sizing: border-box; 
     }
-
     .container { 
         margin-left: 250px; 
         padding: 40px; 
@@ -56,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         justify-content: center;
         align-items: flex-start;
     }
-
     .form-card { 
         background: white; 
         padding: 40px; 
@@ -64,39 +61,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
         width: 100%;
         max-width: 600px;
+        border-top: 5px solid #003366;
     }
-
     input, 
     select { 
         width: 100%; 
         padding: 12px; 
         margin: 10px 0 20px 0; 
-        border: 1px solid #ddd; 
-        border-radius: 5px; 
+        border: 1px solid #ccd1d9; 
+        border-radius: 6px; 
         box-sizing: border-box; 
+        font-size: 0.95rem; 
     }
-
+    input:focus, select:focus {
+        outline: none;
+        border-color: #003366;
+        box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
+    }
     label {
         font-weight: bold;
-        color: #555;
+        color: #003366;
         font-size: 0.9rem;
     }
 
     .btn-save { 
-        background: #9A6F77; 
-        color: white; 
+        background: #FFCC00;
+        color: #003366;
         border: none; 
         padding: 14px; 
         width: 100%; 
-        border-radius: 5px; 
+        border-radius: 6px; 
         cursor: pointer; 
         font-weight: bold; 
         font-size: 1rem;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
     }
 
     .btn-save:hover {
-        background: #7d5a61;
+        background: #e6b800;
+        transform: translateY(-1px);
+    }
+    .sidebar h2 {
+        border-bottom: 2px solid #FFCC00;
+        padding-bottom: 15px; 
+        color: #FFCC00;
     }
 </style>
 </head>

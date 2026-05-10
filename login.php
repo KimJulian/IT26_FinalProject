@@ -8,7 +8,7 @@
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), 
-                        url('nbsc_background.jpg'); /* Replace with your image path */ 
+                        url('nbsc_background.jpg');
             background-color: #f8f9fa; 
             display: flex; 
             justify-content: center; 
