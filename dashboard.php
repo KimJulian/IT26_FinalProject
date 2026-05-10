@@ -35,12 +35,12 @@ while($y_row = $year_data->fetch_assoc()){
             font-family: 'Segoe UI', sans-serif; 
             margin: 0; 
             display: flex; 
-            background-color: #f4f4f4; 
+            background-color: #f0f2f5;
             overflow-x: hidden; 
         }
         .sidebar { 
             width: 250px; 
-            background-color: #9A6F77; 
+            background-color: #003366;
             color: white; 
             height: 100vh; 
             padding: 20px; 
@@ -52,9 +52,10 @@ while($y_row = $year_data->fetch_assoc()){
         }
         .sidebar h2 { 
             font-size: 1.5rem; 
-            border-bottom: 1px solid rgba(255,255,255,0.2); 
+            border-bottom: 1px solid #FFCC00; 
             padding-bottom: 15px; 
-            margin-top: 0; 
+            margin-top: 0;
+            color: #FFCC00; 
         }
         .sidebar ul { 
             list-style: none; 
@@ -74,7 +75,8 @@ while($y_row = $year_data->fetch_assoc()){
             font-weight: 500; 
         }
         .sidebar a:hover { 
-            opacity: 0.8; 
+            background-color: rgba(255, 204, 0, 0.1);
+            color: #FFCC00; 
         }
         .logout-section { 
             margin-top: auto; 
@@ -102,7 +104,7 @@ while($y_row = $year_data->fetch_assoc()){
             border-radius: 8px; 
             flex: 1; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-            border-top: 4px solid #9A6F77; 
+            border-top: 4px solid #003366;
         }
         .chart-card h3 { 
             margin-top: 0; 
@@ -125,8 +127,8 @@ while($y_row = $year_data->fetch_assoc()){
             margin-bottom: 20px; 
         }
         .btn-add { 
-            background: #9A6F77; 
-            color: white; 
+            background: #FFCC00; 
+            color: #003366;
             padding: 10px 20px; 
             border-radius: 6px; 
             text-decoration: none; 
@@ -146,7 +148,7 @@ while($y_row = $year_data->fetch_assoc()){
             text-align: left; 
             background: #f8f9fa; 
             padding: 15px; 
-            border-bottom: 2px solid #dee2e6; 
+            border-bottom: 2px solid #003366;
             font-size: 0.85rem; 
             color: #333; 
         }
@@ -223,12 +225,12 @@ while($y_row = $year_data->fetch_assoc()){
             <tbody>
                 <?php
                 $sql = "SELECT patients.*, inventory.category, inventory.unit 
-                    FROM patients 
-                    LEFT JOIN inventory ON patients.meds_given = inventory.item_name 
+                        FROM patients 
+                        LEFT JOIN inventory ON patients.meds_given = inventory.item_name 
                     ORDER BY patients.date_recorded DESC";
             
                 $result = $conn->query($sql);
-                
+
                 if ($result->num_rows > 0): 
                     while($row = $result->fetch_assoc()): 
                         $fullName = trim($row['patient_name']);
