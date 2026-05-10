@@ -22,23 +22,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    $sql = "INSERT INTO patients (patient_name, course, school_year, date_recorded, diagnosis, meds_given, item_id, doctor_id, status) 
-        VALUES ('$name', '$course', '$sy', '$date', '$diagnosis', '$med_name', '$item_id', '$doctor_id', 'Active')";
+    $stmt = $conn->prepare("INSERT INTO patients (patient_name, course, school_year, date_recorded, diagnosis, meds_given, item_id, doctor_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Active')");
 
-    if ($conn->query($sql) === TRUE) {
-        
-        if (!empty($item_id) && $quantity > 0) {
-            $sql_update_stock = "UPDATE inventory 
-                                 SET stock_quantity = stock_quantity - $quantity 
-                                 WHERE item_id = '$item_id'";
-            
-            $conn->query($sql_update_stock);
-        }
-        
-        header("Location: dashboard.php?msg=Success");
-        exit();
-    } else {
-        echo "Error: " . $conn->error;
+$stmt->bind_param("ssssssii", $name, $course, $sy, $date, $diagnosis, $med_name, $item_id, $doctor_id);
+
+if ($stmt->execute()) {
+    if (!empty($item_id) && $quantity > 0) {
+        $sql_update_stock = "UPDATE inventory 
+                             SET stock_quantity = stock_quantity - ? 
+                             WHERE item_id = ?";
+        $stmt_stock = $conn->prepare($sql_update_stock);
+        $stmt_stock->bind_param("ii", $quantity, $item_id);
+        $stmt_stock->execute();
+        $stmt_stock->close();
     }
+    
+    header("Location: dashboard.php?msg=Success");
+    exit();
+} else {
+    echo "Error: " . $stmt->error;
+}
+$stmt->close();
 }
 ?>

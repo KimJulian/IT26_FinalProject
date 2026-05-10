@@ -15,56 +15,85 @@ $patient = $result->fetch_assoc();
     <title>Edit Patient - HealthFile</title>
     <style>
     body { 
-        font-family: 'Segoe UI', sans-serif; 
-        background-color: #f4f4f4; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background-color: #f0f2f5; 
         padding: 50px; 
     }
     .form-card { 
         background: white; 
-        padding: 30px; 
-        border-radius: 8px; 
-        max-width: 500px; 
+        padding: 40px; 
+        border-radius: 12px; 
+        max-width: 550px; 
         margin: auto; 
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        border-top: 5px solid #003366; 
+    }
+    .form-card h2 {
+        color: #003366;
+        margin-top: 0;
+        text-align: center;
+        font-size: 1.6rem;
     }
     .form-group {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         display: flex;
         flex-direction: column;
     }
     label { 
         font-weight: bold; 
-        margin-bottom: 5px; 
-        color: #333; 
+        margin-bottom: 8px; 
+        color: #003366;
+        font-size: 0.95rem; 
     }
     input, select, textarea, button { 
         width: 100%; 
-        padding: 10px; 
-        margin: 5px 0 10px 0; 
-        border: 1px solid #ddd; 
-        border-radius: 5px; 
+        padding: 12px; 
+        border: 1px solid #ccd1d9; 
+        border-radius: 6px; 
         box-sizing: border-box; 
+        font-size: 1rem;
+        transition: border-color 0.3s ease; 
+    }
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #003366;
+        box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
     }
     textarea { 
         font-family: inherit; 
         resize: vertical; 
+        min-height: 100px; 
     }
     button { 
-        background-color: #9A6F77; 
-        color: white; border: none; 
+        background-color: #FFCC00;
+        color: #003366;
+        border: none; 
+        padding: 15px;
+        width: 100%;
+        border-radius: 6px;
         cursor: pointer; 
         font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     button:hover { 
-        background-color: #7d5a61; 
+        background-color: #e6b800;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
     }
     .back-link { 
         text-align: center; 
         display: block; 
-        margin-top: 15px; 
-        color: #9A6F77; 
+        margin-top: 20px; 
+        color: #003366; 
         text-decoration: none; 
-        }
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+    .back-link:hover {
+        text-decoration: underline;
+    }
 </style>
 </head>
 <body>
