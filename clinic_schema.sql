@@ -16,11 +16,16 @@ CREATE TABLE doctors (
 CREATE TABLE patients (
     patient_id INT PRIMARY KEY AUTO_INCREMENT,
     patient_name VARCHAR(100) NOT NULL,
-    admission_date DATE,
+    course VARCHAR(100),
+    school_year VARCHAR(50),
+    date_recorded DATE,    
     diagnosis VARCHAR(255),
-    doctor_id INT,
+    meds_given VARCHAR(255),      
+    item_id INT,                  
+    doctor_id INT,               
     status VARCHAR(50) DEFAULT 'Active',
-    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
+    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id),
+    FOREIGN KEY (item_id) REFERENCES inventory(item_id)
 );
 
 CREATE TABLE inventory (

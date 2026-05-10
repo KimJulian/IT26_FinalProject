@@ -222,9 +222,13 @@ while($y_row = $year_data->fetch_assoc()){
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM patients";
+                $sql = "SELECT patients.*, inventory.category, inventory.unit 
+                    FROM patients 
+                    LEFT JOIN inventory ON patients.meds_given = inventory.item_name 
+                    ORDER BY patients.date_recorded DESC";
+            
                 $result = $conn->query($sql);
-
+                
                 if ($result->num_rows > 0): 
                     while($row = $result->fetch_assoc()): 
                         $fullName = trim($row['patient_name']);
