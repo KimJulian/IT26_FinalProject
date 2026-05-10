@@ -11,8 +11,8 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
     <title>Add New Patient - HealthFile</title>
     <style>
         body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background-color: #f4f4f4; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f0f2f5; 
             display: flex; 
             justify-content: center; 
             padding-top: 50px; 
@@ -20,13 +20,16 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
         .form-card { 
             background: white; 
             padding: 30px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
-            width: 400px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            width: 420px; 
+            border-top: 5px solid #003366; 
         }
         h2 { 
-            color: #9A6F77; 
+            color: #003366;
             margin-top: 0; 
+            font-size: 1.6rem;
+            text-align: center; 
         }
         .form-group { 
             margin-bottom: 15px; 
@@ -35,32 +38,51 @@ $conn = new mysqli("localhost", "root", "", "healthfile_db");
             display: block; 
             margin-bottom: 5px; 
             font-weight: bold; 
-            color: #555; 
+            color: #003366;
+            font-size: 0.9rem; 
         }
         input, select, textarea { 
             width: 100%; 
             padding: 10px; 
-            border: 1px solid #ddd; 
-            border-radius: 5px; 
+            border: 1px solid #ccd1d9; 
+            border-radius: 6px; 
             box-sizing: border-box; 
+            font-size: 0.95rem; 
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #003366;
+            box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
         }
         button { 
-            background: #9A6F77; 
-            color: white; border: none; 
-            padding: 12px; 
+            background: #FFCC00;
+            color: #003366;
+            border: none; 
+            padding: 14px; 
             width: 100%; 
-            border-radius: 5px; 
+            border-radius: 6px; 
             font-weight: bold; 
+            font-size: 1rem;
             cursor: pointer; 
-            margin-top: 10px; 
+            margin-top: 15px; 
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        }
+        button:hover {
+            background: #e6b800;
+            transform: translateY(-1px);
         }
         .back-link { 
             display: block; 
             text-align: center; 
-            margin-top: 15px; 
-            color: #666; 
+            margin-top: 20px; 
+            color: #003366; 
             text-decoration: none; 
             font-size: 0.9rem; 
+            font-weight: 500; 
+        }
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>

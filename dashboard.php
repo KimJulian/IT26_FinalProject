@@ -174,7 +174,7 @@ while($y_row = $year_data->fetch_assoc()){
         <li><a href="inventory.php">💊 Available Med/Capsule</a></li>
     </ul>
     <div class="logout-section">
-        <a href="logout.php" style="color: #ffb3b3;">
+        <a href="logout.php" style="color: white; font-weight: bold">
             <span style="font-size: 1.2rem;">🚪</span> Logout
         </a>
     </div>
