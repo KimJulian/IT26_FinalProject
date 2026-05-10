@@ -293,10 +293,21 @@ while($y_row = $year_data->fetch_assoc()){
             datasets: [{
                 label: 'Students',
                 data: <?php echo json_encode($course_counts); ?>,
-                backgroundColor: '#9A6F77'
+                backgroundColor: '#003366'
             }]
         },
-        options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        options: { 
+            maintainAspectRatio: false, 
+            plugins: { 
+                legend: { display: false } 
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#f0f0f0' }
+                }
+            }
+        }
     });
 
     const yearCtx = document.getElementById('yearChart').getContext('2d');
@@ -306,11 +317,20 @@ while($y_row = $year_data->fetch_assoc()){
             labels: <?php echo json_encode($years); ?>,
             datasets: [{
                 data: <?php echo json_encode($year_counts); ?>,
-                backgroundColor: ['#9A6F77', '#C8A2C8', '#7d5a61', '#b38b93'],
-                borderWidth: 1
+                backgroundColor: ['#FFCC00', '#003366', '#004080', '#0059b3'],
+                borderWidth: 2,
+                borderColor: '#ffffff'
             }]
         },
-        options: { maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+        options: { 
+            maintainAspectRatio: false, 
+            plugins: { 
+                legend: { 
+                    position: 'right',
+                    labels: { color: '#333', font: { weight: 'bold' } }
+                } 
+            } 
+        }
     });
 </script>
 </body>
