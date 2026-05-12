@@ -6,7 +6,11 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "healthfile_db");
+$conn = new mysqli("your_hostname", "your_db_username", "your_db_password", "your_db_name");
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 $course_data = $conn->query("SELECT course, COUNT(*) as count FROM patients GROUP BY course");
 $courses = []; $course_counts = [];
